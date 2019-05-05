@@ -31,15 +31,15 @@ export class HelpCommand implements Command {
         }
     }
 
-    private buildHelpMessageForCommand(command: Command, context: CommandContext): string {
-        return `${command.getHelpMessage(context.commandPrefix)}\nCommand aliases: ${command.commandNames.join(", ")}`;
-    }
-
     hasPermissionToRun(commandContext: CommandContext): boolean {
         return true;
     }
 
     getHelpMessage(commandPrefix: string) {
         return "I think you already know how to use this command...";
+    }
+
+    private buildHelpMessageForCommand(command: Command, context: CommandContext): string {
+        return `${command.getHelpMessage(context.commandPrefix)}\nCommand aliases: ${command.commandNames.join(", ")}`;
     }
 }

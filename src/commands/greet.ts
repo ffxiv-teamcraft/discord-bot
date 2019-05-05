@@ -1,18 +1,23 @@
-import { Command } from "./command";
-import { CommandContext } from "../models/command_context";
+import {Command} from "./command";
+import {CommandContext} from "../models/command_context";
+import {DatabaseCommand} from "./database-command";
 
-export class GreetCommand implements Command {
-  commandNames = ["greet", "hello"];
+export class GreetCommand extends DatabaseCommand implements Command {
+    commandNames = ["greet", "hello"];
 
-  getHelpMessage(commandPrefix: string): string {
-    return `Use ${commandPrefix}greet to get a greeting.`;
-  }
+    constructor() {
+        super();
+    }
 
-  async run(parsedUserCommand: CommandContext): Promise<void> {
-    await parsedUserCommand.originalMessage.reply("hello, world!");
-  }
+    getHelpMessage(commandPrefix: string): string {
+        return `Use ${commandPrefix}greet to get a greeting.`;
+    }
 
-  hasPermissionToRun(parsedUserCommand: CommandContext): boolean {
-    return true;
-  }
+    async run(parsedUserCommand: CommandContext): Promise<void> {
+        await parsedUserCommand.originalMessage.reply("hello, world!");
+    }
+
+    hasPermissionToRun(parsedUserCommand: CommandContext): boolean {
+        return true;
+    }
 }
