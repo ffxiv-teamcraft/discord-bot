@@ -1,2 +1,2 @@
 # discord-bot
-Teamcraft discord bot for patreon users
+Teamcraft discord bot
