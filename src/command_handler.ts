@@ -4,6 +4,7 @@ import {CommandContext} from "./models/command_context";
 import {HelpCommand} from "./commands/help";
 import {reactor} from "./reactions/reactor";
 import {GreetCommand} from "./commands/greet";
+import {BugCommand} from "./commands/bug";
 import {config} from "./config/config";
 import {StatusCommand} from "./commands/status";
 
@@ -16,7 +17,8 @@ export class CommandHandler {
     constructor(prefix: string) {
         const commandClasses = [
             GreetCommand,
-            StatusCommand
+            StatusCommand,
+            BugCommand
         ];
 
         this.commands = commandClasses.map(commandClass => new commandClass());
