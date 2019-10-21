@@ -1,12 +1,11 @@
 import {Command} from "./command";
 import {CommandContext} from "../models/command_context";
-import {DatabaseCommand} from "./database-command";
+import { RichEmbed } from "discord.js"
 
-export class BugCommand extends DatabaseCommand implements Command {
+export class BugCommand implements Command {
     commandNames = ["bug", "bug-report"];
 
     constructor() {
-        super();
     }
 
     getHelpMessage(commandPrefix: string): string {
@@ -14,7 +13,21 @@ export class BugCommand extends DatabaseCommand implements Command {
     }
 
     async run(parsedUserCommand: CommandContext): Promise<void> {
-        await parsedUserCommand.originalMessage.reply("**Describe the bug** A clear and concise description of what the bug is. \n\n **Steps to Reproduce** Detailed steps on how to reproduce the bug. A bug that can't be reproduced is a bug that can't be fixed. \n\n **Expected Behavior** A clear and concise description of what you expected to happen. \n\n **Screenshots** If possible provide screenshots to help explain the issue. Using ``CTRL + SHIFT + I``, opening the console tab and showing us what is in there also helps a ton. \n\n **Environment** What environment are you running things on? Is it the desktop app or the website? If the app, what version? If the site, what browser are you using?");
+        const embed = new RichEmbed()
+        .setAuthor(`Supamiu`, ``, `https://github.com/ffxiv-teamcraft/ffxiv-teamcraft/issues/new?template=bug_report.md`)
+        .setTitle("How to submit a bug report for Teamcraft")
+        .setDescription("A clear and concise description of what the bug is.")
+        .addField("Steps to reproduce!", "A bug that can't be reproduced can't be fixed. Explain in detail what needs to be done to create the bug you are experiencing.")
+        .addField("Expected Behavior!", "A clear and concise description of what you expected to happen.")
+        .addField("Screenshots!", "Please provide any screenshots you can of what is happening. Opening the console via CTRL + SHIFT + I and clicking the console tab can also help us diagnose the issue.")
+        .addField("Software Version/Type!", "Are you using the website or the desktop app? If the app then what version? If the website then what browser?")
+        .addField("Additional Information", "Any additional context can help diagnose the issue. The more info the better!")
+        .setFooter(
+          "ffxiv-teamcraft",
+          "https://ffxivteamcraft.com/assets/logo.png"
+        )
+        .setColor("#4880b1");
+        await parsedUserCommand.originalMessage.channel.send(embed);
     }
 
     hasPermissionToRun(parsedUserCommand: CommandContext): boolean {
