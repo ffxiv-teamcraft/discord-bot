@@ -8,6 +8,7 @@ import {BugCommand} from "./commands/bug";
 import {config} from "./config/config";
 import {StatusCommand} from "./commands/status";
 import { ConsoleCommand } from "./commands/console";
+import { WikiCommand } from "./commands/wiki";
 
 /** Handler for bot commands issued by users. */
 export class CommandHandler {
@@ -20,7 +21,8 @@ export class CommandHandler {
             GreetCommand,
             StatusCommand,
             BugCommand,
-            ConsoleCommand
+            ConsoleCommand,
+            WikiCommand
         ];
 
         this.commands = commandClasses.map(commandClass => new commandClass());
