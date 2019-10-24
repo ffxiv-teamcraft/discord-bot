@@ -9,6 +9,8 @@ import {config} from "./config/config";
 import {StatusCommand} from "./commands/status";
 import { ConsoleCommand } from "./commands/console";
 import { WikiCommand } from "./commands/wiki";
+import { ClearLocalCommand } from "./commands/clearlocal";
+import { KasperskyCommand } from "./commands/kaspersky";
 
 /** Handler for bot commands issued by users. */
 export class CommandHandler {
@@ -22,7 +24,9 @@ export class CommandHandler {
             StatusCommand,
             BugCommand,
             ConsoleCommand,
-            WikiCommand
+            WikiCommand,
+            ClearLocalCommand,
+            KasperskyCommand
         ];
 
         this.commands = commandClasses.map(commandClass => new commandClass());
