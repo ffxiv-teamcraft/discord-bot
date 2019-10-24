@@ -1,7 +1,5 @@
 import * as admin from 'firebase-admin';
 
-// const serviceAccount = require(process.env.SERVICE_ACCOUNT);
-
 export abstract class DatabaseCommand {
     protected static APP: admin.app.App;
 
@@ -18,11 +16,16 @@ export abstract class DatabaseCommand {
     }
 
     protected constructor() {
-        if (DatabaseCommand.APP === undefined) {
-        //    DatabaseCommand.APP = admin.initializeApp({
-        //        credential: admin.credential.cert(serviceAccount),
-        //        databaseURL: 'https://ffxivteamcraft.firebaseio.com'
-        //   });
+        try {
+            const serviceAccount = require(process.env.SERVICE_ACCOUNT);
+            if (DatabaseCommand.APP === undefined && serviceAccount !== {}) {
+                DatabaseCommand.APP = admin.initializeApp({
+                    credential: admin.credential.cert(serviceAccount),
+                    databaseURL: 'https://ffxivteamcraft.firebaseio.com'
+                });
+            }
+        } catch (e) {
+            // You don't have a service account, well, no db commands for you.
         }
     }
 }
