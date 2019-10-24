@@ -9,13 +9,13 @@ export class ClearLocalCommand implements Command {
     }
 
     getHelpMessage(commandPrefix: string): string {
-        return `Use ${commandPrefix}console to get information on how to open the chrome dev tools.`;
+        return `Use ${commandPrefix}clearlocal to learn how to clear the local storage and cache on the desktop app`;
     }
 
     async run(parsedUserCommand: CommandContext): Promise<void> {
         const embed = new RichEmbed()
         .setAuthor(`Supamiu`, ``, `https://github.com/ffxiv-teamcraft/ffxiv-teamcraft/`)
-        .setTitle("How to clear local storage and cache on desktop app")
+        .setTitle("How to clear local storage and cache on the desktop app")
         .addField("Close the app", "Make sure the app is closed in its entirety.")
         .addField("Open the Run Dialog", "Press Windows Key + R")
         .addField("Navigate to the teamcraft folder", "Type %appdata% and navigate to the ffxiv-teamcraft folder")
