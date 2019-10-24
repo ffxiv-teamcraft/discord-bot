@@ -14,7 +14,6 @@ export class ClearLocalCommand implements Command {
 
     async run(parsedUserCommand: CommandContext): Promise<void> {
         const embed = new RichEmbed()
-        .setAuthor(`Supamiu`, ``, `https://github.com/ffxiv-teamcraft/ffxiv-teamcraft/`)
         .setTitle("How to clear local storage and cache on the desktop app")
         .addField("Close the app", "Make sure the app is closed in its entirety.")
         .addField("Open the Run Dialog", "Press Windows Key + R")

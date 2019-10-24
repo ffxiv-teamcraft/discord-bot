@@ -14,7 +14,6 @@ export class BugCommand implements Command {
 
     async run(parsedUserCommand: CommandContext): Promise<void> {
         const embed = new RichEmbed()
-        .setAuthor(`Supamiu`, ``, `https://github.com/ffxiv-teamcraft/ffxiv-teamcraft/issues/new?template=bug_report.md`)
         .setTitle("How to submit a bug report for Teamcraft")
         .setDescription("A clear and concise description of what the bug is.")
         .addField("Steps to reproduce!", "A bug that can't be reproduced can't be fixed. Explain in detail what needs to be done to create the bug you are experiencing.")
