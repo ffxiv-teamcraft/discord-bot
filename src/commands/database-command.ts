@@ -1,6 +1,6 @@
 import * as admin from 'firebase-admin';
 
-const serviceAccount = require(process.env.SERVICE_ACCOUNT);
+// const serviceAccount = require(process.env.SERVICE_ACCOUNT);
 
 export abstract class DatabaseCommand {
     protected static APP: admin.app.App;
@@ -19,10 +19,10 @@ export abstract class DatabaseCommand {
 
     protected constructor() {
         if (DatabaseCommand.APP === undefined) {
-            DatabaseCommand.APP = admin.initializeApp({
-                credential: admin.credential.cert(serviceAccount),
-                databaseURL: 'https://ffxivteamcraft.firebaseio.com'
-            });
+        //    DatabaseCommand.APP = admin.initializeApp({
+        //        credential: admin.credential.cert(serviceAccount),
+        //        databaseURL: 'https://ffxivteamcraft.firebaseio.com'
+        //   });
         }
     }
 }
