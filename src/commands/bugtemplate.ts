@@ -14,13 +14,8 @@ export class BugTemplateCommand implements Command {
 
     async run(parsedUserCommand: CommandContext): Promise<void> {
         const embed = new RichEmbed()
-        .setTitle("How to submit a bug report for Teamcraft")
-        .addField("A clear and concise description of what the bug is.", ">")
-        .addField("Steps to reproduce!", ">")
-        .addField("Expected Behavior!", ">")
-        .addField("Software Version/Type!", ">")
-        .addField("Additional Information", ">")
-        .addField("Screenshots!", ">")
+        .setTitle("Bug Report Template")
+        .setDescription("```**Issue:** \n> \n**Steps to Reproduce:**\n> \n**Expected Behaviour:**\n> \n**Teamcraft Version - Browser / Desktop Client**\n> \n**Additional Information:**\n> \n**Screenshots:**\n\nCopy this and fill next to the > ```")
         .setFooter(
           "ffxiv-teamcraft",
           "https://ffxivteamcraft.com/assets/logo.png"

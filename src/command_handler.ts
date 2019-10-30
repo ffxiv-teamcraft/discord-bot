@@ -48,7 +48,6 @@ export class CommandHandler {
         const matchedCommand = this.commands.find(command => command.commandNames.includes(commandContext.parsedCommandName));
 
         if (!matchedCommand) {
-            await message.reply(`I don't recognize that command. Try ${config.prefix}help.`);
             await reactor.failure(message);
         } else if (!allowedCommands.includes(matchedCommand)) {
             await message.reply(`you aren't allowed to use that command. Try ${config.prefix}help.`);
