@@ -12,6 +12,7 @@ import { WikiCommand } from "./commands/wiki";
 import { ClearLocalCommand } from "./commands/clearlocal";
 import { KasperskyCommand } from "./commands/kaspersky";
 import { BugTemplateCommand } from "./commands/bugtemplate";
+import { OpenExternalCommand } from "./commands/opendesktop";
 
 /** Handler for bot commands issued by users. */
 export class CommandHandler {
@@ -28,7 +29,8 @@ export class CommandHandler {
             WikiCommand,
             ClearLocalCommand,
             KasperskyCommand,
-            BugTemplateCommand
+            BugTemplateCommand,
+            OpenExternalCommand
         ];
 
         this.commands = commandClasses.map(commandClass => new commandClass());
