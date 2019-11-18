@@ -12,6 +12,8 @@ import { WikiCommand } from "./commands/wiki";
 import { ClearLocalCommand } from "./commands/clearlocal";
 import { KasperskyCommand } from "./commands/kaspersky";
 import { RotationHelpCommand } from "./commands/rotation-help";
+import { BugTemplateCommand } from "./commands/bugtemplate";
+import { OpenExternalCommand } from "./commands/opendesktop";
 
 /** Handler for bot commands issued by users. */
 export class CommandHandler {
@@ -28,7 +30,9 @@ export class CommandHandler {
             WikiCommand,
             ClearLocalCommand,
             KasperskyCommand,
-            RotationHelpCommand
+            RotationHelpCommand,
+            BugTemplateCommand,
+            OpenExternalCommand
         ];
 
         this.commands = commandClasses.map(commandClass => new commandClass());
@@ -48,7 +52,6 @@ export class CommandHandler {
         const matchedCommand = this.commands.find(command => command.commandNames.includes(commandContext.parsedCommandName));
 
         if (!matchedCommand) {
-            await message.reply(`I don't recognize that command. Try ${config.prefix}help.`);
             await reactor.failure(message);
         } else if (!allowedCommands.includes(matchedCommand)) {
             await message.reply(`you aren't allowed to use that command. Try ${config.prefix}help.`);
