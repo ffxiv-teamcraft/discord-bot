@@ -11,6 +11,7 @@ import { ConsoleCommand } from "./commands/console";
 import { WikiCommand } from "./commands/wiki";
 import { ClearLocalCommand } from "./commands/clearlocal";
 import { KasperskyCommand } from "./commands/kaspersky";
+import { RotationHelpCommand } from "./commands/rotation-help";
 import { BugTemplateCommand } from "./commands/bugtemplate";
 import { OpenExternalCommand } from "./commands/opendesktop";
 
@@ -29,6 +30,7 @@ export class CommandHandler {
             WikiCommand,
             ClearLocalCommand,
             KasperskyCommand,
+            RotationHelpCommand,
             BugTemplateCommand,
             OpenExternalCommand
         ];
