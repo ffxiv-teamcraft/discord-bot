@@ -24,7 +24,7 @@ export class TimezonesCommand implements Command {
 
     async run(parsedUserCommand: CommandContext): Promise<void> {
         let builtList = this.modsTimezones.reduce((str, row) => {
-            return str + `\n - ${row.name}: ${moment().tz(row.timezone)}`
+            return str + `\n - ${row.name}: ${moment().tz(row.timezone).format('hh:mm a')}`
         }, '');
 
         const embed = new RichEmbed()
