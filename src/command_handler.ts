@@ -7,13 +7,14 @@ import {GreetCommand} from "./commands/greet";
 import {BugCommand} from "./commands/bug";
 import {config} from "./config/config";
 import {StatusCommand} from "./commands/status";
-import { ConsoleCommand } from "./commands/console";
-import { WikiCommand } from "./commands/wiki";
-import { ClearLocalCommand } from "./commands/clearlocal";
-import { KasperskyCommand } from "./commands/kaspersky";
-import { RotationHelpCommand } from "./commands/rotation-help";
-import { BugTemplateCommand } from "./commands/bugtemplate";
-import { OpenExternalCommand } from "./commands/opendesktop";
+import {ConsoleCommand} from "./commands/console";
+import {WikiCommand} from "./commands/wiki";
+import {ClearLocalCommand} from "./commands/clearlocal";
+import {KasperskyCommand} from "./commands/kaspersky";
+import {RotationHelpCommand} from "./commands/rotation-help";
+import {BugTemplateCommand} from "./commands/bugtemplate";
+import {OpenExternalCommand} from "./commands/opendesktop";
+import {TimezonesCommand} from "./commands/timezones";
 
 /** Handler for bot commands issued by users. */
 export class CommandHandler {
@@ -32,7 +33,8 @@ export class CommandHandler {
             KasperskyCommand,
             RotationHelpCommand,
             BugTemplateCommand,
-            OpenExternalCommand
+            OpenExternalCommand,
+            TimezonesCommand
         ];
 
         this.commands = commandClasses.map(commandClass => new commandClass());
