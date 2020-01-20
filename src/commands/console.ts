@@ -8,7 +8,7 @@ export class ConsoleCommand implements Command {
     }
 
     getHelpMessage(commandPrefix: string): string {
-        return `Use ${commandPrefix}bug to get information on how to open the chrome dev tools.`;
+        return `Use ${commandPrefix}console to get information on how to open the chrome dev tools.`;
     }
 
     async run(parsedUserCommand: CommandContext): Promise<void> {

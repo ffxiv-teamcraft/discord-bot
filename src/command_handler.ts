@@ -7,7 +7,14 @@ import {GreetCommand} from "./commands/greet";
 import {BugCommand} from "./commands/bug";
 import {config} from "./config/config";
 import {StatusCommand} from "./commands/status";
-import { ConsoleCommand } from "./commands/console";
+import {ConsoleCommand} from "./commands/console";
+import {WikiCommand} from "./commands/wiki";
+import {ClearLocalCommand} from "./commands/clearlocal";
+import {KasperskyCommand} from "./commands/kaspersky";
+import {RotationHelpCommand} from "./commands/rotation-help";
+import {BugTemplateCommand} from "./commands/bugtemplate";
+import {OpenExternalCommand} from "./commands/opendesktop";
+import {TimezonesCommand} from "./commands/timezones";
 
 /** Handler for bot commands issued by users. */
 export class CommandHandler {
@@ -20,7 +27,14 @@ export class CommandHandler {
             GreetCommand,
             StatusCommand,
             BugCommand,
-            ConsoleCommand
+            ConsoleCommand,
+            WikiCommand,
+            ClearLocalCommand,
+            KasperskyCommand,
+            RotationHelpCommand,
+            BugTemplateCommand,
+            OpenExternalCommand,
+            TimezonesCommand
         ];
 
         this.commands = commandClasses.map(commandClass => new commandClass());
@@ -40,7 +54,6 @@ export class CommandHandler {
         const matchedCommand = this.commands.find(command => command.commandNames.includes(commandContext.parsedCommandName));
 
         if (!matchedCommand) {
-            await message.reply(`I don't recognize that command. Try ${config.prefix}help.`);
             await reactor.failure(message);
         } else if (!allowedCommands.includes(matchedCommand)) {
             await message.reply(`you aren't allowed to use that command. Try ${config.prefix}help.`);
