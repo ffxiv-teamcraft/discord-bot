@@ -10,7 +10,12 @@ export class TimezonesCommand implements Command {
     ];
 
     readonly modsTimezones = [
-        {name: 'Miu', timezone: 'Europe/Paris'}
+        {name: 'Miu', timezone: 'Europe/Paris'},
+        {name: 'Acchan', timezone: 'Australia/Melbourne'},
+        {name: 'Qih', timezone: 'America/Los_Angeles'},
+        {name: 'Tataru', timezone: 'Europe/London'},
+        {name: 'Dis', timezone: 'America/New_York'},
+        {name: 'Late', timezone: 'America/New_York'},
     ];
 
     getHelpMessage(commandPrefix: string): string {
