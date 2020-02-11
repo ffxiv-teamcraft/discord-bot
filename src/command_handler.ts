@@ -15,6 +15,8 @@ import {RotationHelpCommand} from "./commands/rotation-help";
 import {BugTemplateCommand} from "./commands/bugtemplate";
 import {OpenExternalCommand} from "./commands/opendesktop";
 import {TimezonesCommand} from "./commands/timezones";
+import { DirtyInstallCommand } from "./commands/dirty";
+import { FixTimeCommand } from "./commands/time";
 
 /** Handler for bot commands issued by users. */
 export class CommandHandler {
@@ -34,7 +36,10 @@ export class CommandHandler {
             RotationHelpCommand,
             BugTemplateCommand,
             OpenExternalCommand,
+            DirtyInstallCommand,
+            FixTimeCommand,
             TimezonesCommand
+            
         ];
 
         this.commands = commandClasses.map(commandClass => new commandClass());
