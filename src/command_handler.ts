@@ -17,6 +17,7 @@ import {OpenExternalCommand} from "./commands/opendesktop";
 import {TimezonesCommand} from "./commands/timezones";
 import { DirtyInstallCommand } from "./commands/dirty";
 import { FixTimeCommand } from "./commands/time";
+import { MemberCountCommand } from "./commands/membercount";
 
 /** Handler for bot commands issued by users. */
 export class CommandHandler {
@@ -38,7 +39,8 @@ export class CommandHandler {
             OpenExternalCommand,
             DirtyInstallCommand,
             FixTimeCommand,
-            TimezonesCommand
+            TimezonesCommand,
+            MemberCountCommand
             
         ];
 
