@@ -23,7 +23,7 @@ export class TimezonesCommand implements Command {
     }
 
     hasPermissionToRun(parsedUserCommand: CommandContext): boolean {
-        const requiredRole: Role = parsedUserCommand.originalMessage.guild.roles.find('name', 'Moderator');
+        const requiredRole: Role = parsedUserCommand.originalMessage.guild.roles.find('name', 'Moderator','Troubleshooter');
         return parsedUserCommand.originalMessage.member.roles.has(requiredRole.id);
     }
 
