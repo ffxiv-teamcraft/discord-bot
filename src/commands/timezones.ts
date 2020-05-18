@@ -23,8 +23,9 @@ export class TimezonesCommand implements Command {
     }
 
     hasPermissionToRun(parsedUserCommand: CommandContext): boolean {
-        const requiredRole: Role = parsedUserCommand.originalMessage.guild.roles.find('name', 'Troubleshooter');
-        return parsedUserCommand.originalMessage.member.roles.has(requiredRole.id);
+        const troubleshooterRole: Role = parsedUserCommand.originalMessage.guild.roles.find('name', 'Troubleshooter');            
+        const moderatorRole: Role = parsedUserCommand.originalMessage.guild.roles.find('name', 'Moderator');
+        return parsedUserCommand.originalMessage.member.roles.has(troubleshooterRole.id) || parsedUserCommand.originalMessage.member.roles.has(moderatorRole.id);
     }
 
     async run(parsedUserCommand: CommandContext): Promise<void> {
