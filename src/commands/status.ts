@@ -1,8 +1,8 @@
 import {Command} from "./command";
 import {CommandContext} from "../models/command_context";
-import {DatabaseCommand} from "./database-command";
+import {FirebaseCommand} from "./abstract/firebase-command";
 
-export class StatusCommand extends DatabaseCommand implements Command {
+export class StatusCommand extends FirebaseCommand implements Command {
     commandNames = ["status"];
 
     constructor() {

@@ -1,6 +1,6 @@
 import {Command} from "./command";
 import {CommandContext} from "../models/command_context";
-import { RichEmbed } from "discord.js"
+import { MessageEmbed } from "discord.js"
 
 export class OpenExternalCommand implements Command {
     commandNames = ["opendesktop", "opendesk"];
@@ -13,7 +13,7 @@ export class OpenExternalCommand implements Command {
     }
 
     async run(parsedUserCommand: CommandContext): Promise<void> {
-        const embed = new RichEmbed()
+        const embed = new MessageEmbed()
         .setTitle("How to open a link in the desktop app")
         .setDescription("To open a link in the desktop app you simply replace ``https://teamcraft.com`` with ``teamcraft://``")
         .addField("Example", "``https://ffxivteamcraft.com/teams/invite/example`` \n becomes \n``teamcraft://teams/invite/example``")

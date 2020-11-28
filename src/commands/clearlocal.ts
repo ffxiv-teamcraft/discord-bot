@@ -1,6 +1,6 @@
 import {Command} from "./command";
 import {CommandContext} from "../models/command_context";
-import {RichEmbed} from "discord.js"
+import {MessageEmbed} from "discord.js"
 
 export class ClearLocalCommand implements Command {
     commandNames = ["clearlocal", "localstorage"];
@@ -13,7 +13,7 @@ export class ClearLocalCommand implements Command {
     }
 
     async run(parsedUserCommand: CommandContext): Promise<void> {
-        const embed = new RichEmbed()
+        const embed = new MessageEmbed()
         .setTitle("How to clear local storage and cache on the desktop app")
         .addField("Close the app", "Make sure the app is closed in its entirety.")
         .addField("Open the Run Dialog", "Press Windows Key + R")

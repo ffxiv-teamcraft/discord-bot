@@ -1,6 +1,6 @@
 import {Command} from "./command";
 import {CommandContext} from "../models/command_context";
-import { RichEmbed } from "discord.js"
+import { MessageEmbed } from "discord.js"
 
 export class BugTemplateCommand implements Command {
     commandNames = ["bugtemplate", "btemp"];
@@ -13,7 +13,7 @@ export class BugTemplateCommand implements Command {
     }
 
     async run(parsedUserCommand: CommandContext): Promise<void> {
-        const embed = new RichEmbed()
+        const embed = new MessageEmbed()
         .setTitle("Bug Report Template")
         .setDescription("```**Issue:** \n> \n**Steps to Reproduce:**\n> \n**Expected Behaviour:**\n> \n**Teamcraft Version - Browser / Desktop Client**\n> \n**Additional Information:**\n> \n**Screenshots:**\n\nCopy this and fill next to the > ```")
         .setFooter(

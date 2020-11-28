@@ -1,6 +1,6 @@
 import {Command} from "./command";
 import {CommandContext} from "../models/command_context";
-import {RichEmbed, Role} from "discord.js";
+import {MessageEmbed, Role} from "discord.js";
 
 const moment = require('moment-timezone');
 
@@ -23,9 +23,9 @@ export class TimezonesCommand implements Command {
     }
 
     hasPermissionToRun(parsedUserCommand: CommandContext): boolean {
-        const troubleshooterRole: Role = parsedUserCommand.originalMessage.guild.roles.find('name', 'Troubleshooter');            
-        const moderatorRole: Role = parsedUserCommand.originalMessage.guild.roles.find('name', 'Moderator');
-        return parsedUserCommand.originalMessage.member.roles.has(troubleshooterRole.id) || parsedUserCommand.originalMessage.member.roles.has(moderatorRole.id);
+        const troubleshooterRole: Role = parsedUserCommand.originalMessage.guild.roles.cache.find(role => role.name === 'Troubleshooter');
+        const moderatorRole: Role = parsedUserCommand.originalMessage.guild.roles.cache.find(role => role.name === 'Moderator');
+        return parsedUserCommand.authorMember.roles.cache.has(troubleshooterRole.id) || parsedUserCommand.authorMember.roles.cache.has(moderatorRole.id);
     }
 
     async run(parsedUserCommand: CommandContext): Promise<void> {
@@ -33,7 +33,7 @@ export class TimezonesCommand implements Command {
             return str + `\n - ${row.name}: ${moment().tz(row.timezone).format('hh:mm a')}`
         }, '');
 
-        const embed = new RichEmbed()
+        const embed = new MessageEmbed()
             .setTitle("Moderators and time at their place")
             .setDescription(`${builtList}`)
             .setFooter(

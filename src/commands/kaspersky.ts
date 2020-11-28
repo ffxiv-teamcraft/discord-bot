@@ -1,6 +1,6 @@
 import {Command} from "./command";
 import {CommandContext} from "../models/command_context";
-import {RichEmbed} from "discord.js"
+import {MessageEmbed} from "discord.js"
 
 export class KasperskyCommand implements Command {
     commandNames = ["kaspersky"];
@@ -13,7 +13,7 @@ export class KasperskyCommand implements Command {
     }
 
     async run(parsedUserCommand: CommandContext): Promise<void> {
-        const embed = new RichEmbed()
+        const embed = new MessageEmbed()
         .setTitle("Kaspersky")
         .setDescription("Sadly Kaspersky has been blocking Firestore by default, which is Teamcrafts database. ")
         .addField("However one way this can be fixed is by whitelisting Firestore.", "Go to [Kaspersky](https://www.kaspersky.com.au/blog/kaspersky-add-exclusion/14765/) and add ``https://firestore.googleapis.com/*`` to the whitelist")

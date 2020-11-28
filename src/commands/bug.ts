@@ -1,6 +1,6 @@
 import {Command} from "./command";
 import {CommandContext} from "../models/command_context";
-import { RichEmbed } from "discord.js"
+import { MessageEmbed } from "discord.js"
 
 export class BugCommand implements Command {
     commandNames = ["bug", "bug-report"];
@@ -13,7 +13,7 @@ export class BugCommand implements Command {
     }
 
     async run(parsedUserCommand: CommandContext): Promise<void> {
-        const embed = new RichEmbed()
+        const embed = new MessageEmbed()
         .setTitle("How to submit a bug report for Teamcraft")
         .setDescription("A clear and concise description of what the bug is.")
         .addField("Steps to reproduce!", "A bug that can't be reproduced can't be fixed. Explain in detail what needs to be done to create the bug you are experiencing.")

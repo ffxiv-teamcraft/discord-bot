@@ -1,6 +1,6 @@
 import { Command } from "./command";
 import { CommandContext } from "../models/command_context";
-import { RichEmbed } from "discord.js";
+import { MessageEmbed } from "discord.js";
 
 export class RotationHelpCommand implements Command {
   commandNames = ["rotation", "rotation-help"];  
@@ -10,7 +10,7 @@ export class RotationHelpCommand implements Command {
   }
 
   async run(parsedUserCommand: CommandContext): Promise<void> {
-    const embed = new RichEmbed()
+    const embed = new MessageEmbed()
       .setTitle("How to submit data for rotation help")
       .setDescription("A clear and concise way to get some help on a rotation.")
       .addField("Name of Item", "What are you trying to make?")

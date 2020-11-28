@@ -1,25 +1,25 @@
 import * as admin from 'firebase-admin';
 
-export abstract class DatabaseCommand {
+export abstract class FirebaseCommand {
     protected static APP: admin.app.App;
 
     protected get auth(): admin.auth.Auth {
-        return DatabaseCommand.APP.auth();
+        return FirebaseCommand.APP.auth();
     }
 
     protected get rtdb(): admin.database.Database {
-        return DatabaseCommand.APP.database();
+        return FirebaseCommand.APP.database();
     }
 
     protected get firestore(): admin.firestore.Firestore {
-        return DatabaseCommand.APP.firestore();
+        return FirebaseCommand.APP.firestore();
     }
 
     protected constructor() {
         try {
             const serviceAccount = require(process.env.SERVICE_ACCOUNT);
-            if (DatabaseCommand.APP === undefined && serviceAccount) {
-                DatabaseCommand.APP = admin.initializeApp({
+            if (FirebaseCommand.APP === undefined && serviceAccount) {
+                FirebaseCommand.APP = admin.initializeApp({
                     credential: admin.credential.cert(serviceAccount),
                     databaseURL: 'https://ffxivteamcraft.firebaseio.com'
                 });

@@ -1,6 +1,7 @@
 import Discord, {Message} from "discord.js";
 import {BotConfig, config} from "./config/config";
 import {CommandHandler} from "./command_handler";
+import {CommissionCreationSub} from "./pub-sub/commission-creation-sub";
 
 validateConfig(config);
 
@@ -8,7 +9,7 @@ const commandHandler = new CommandHandler(config.prefix);
 
 const client = new Discord.Client();
 
-//https://discordapp.com/api/oauth2/authorize?client_id=574647725900169226&permissions=2112&scope=bot
+//https://discordapp.com/api/oauth2/authorize?client_id=782224077632962571&permissions=2112&scope=bot
 
 client.on("ready", () => {
     console.log("Bot has started");
@@ -23,6 +24,8 @@ client.on("error", e => {
 });
 
 client.login(config.token);
+
+new CommissionCreationSub(client).start();
 
 /** Pre-startup validation of the bot config. */
 function validateConfig(config: BotConfig) {

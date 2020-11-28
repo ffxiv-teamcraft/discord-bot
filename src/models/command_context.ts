@@ -1,4 +1,4 @@
-import {Message} from "discord.js";
+import {GuildMember, Message} from "discord.js";
 
 /** A user-given command extracted from a message. */
 export class CommandContext {
@@ -8,6 +8,8 @@ export class CommandContext {
     readonly args: string[];
     /** Original Message the command was extracted from. */
     readonly originalMessage: Message;
+    /** Original Message the command was extracted from. */
+    readonly authorMember: GuildMember;
 
     readonly commandPrefix: string;
 
@@ -18,5 +20,6 @@ export class CommandContext {
         this.parsedCommandName = splitMessage.shift().toLowerCase();
         this.args = splitMessage;
         this.originalMessage = message;
+        this.authorMember = message.member || message.guild.member(message.author);
     }
 }
