@@ -15,7 +15,8 @@ export class CommissionCreationSub {
         light: '782287186585452596',
         猫小胖: '782287293712302081',
         莫古力: '782287319221796865',
-        陆行鸟: '782287342563098646'
+        陆行鸟: '782287342563098646',
+        korea: '782635554259861530'
     }
 
     constructor(private client: Client) {
