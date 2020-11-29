@@ -25,7 +25,7 @@ export class CommissionCreationSub {
     public async start() {
         const itemNames = await fetch('https://raw.githubusercontent.com/ffxiv-teamcraft/ffxiv-teamcraft/staging/apps/client/src/assets/data/items.json')
             .then(res => res.json())
-        const pubsub = new PubSub({projectId: 'ffxiv-teamcraft'});
+        const pubsub = new PubSub({projectId: 'ffxivteamcraft'});
         const subscription = await pubsub.topic('commissions-created').subscription('bot');
         subscription.on('message', (message) => {
             message.ack();
