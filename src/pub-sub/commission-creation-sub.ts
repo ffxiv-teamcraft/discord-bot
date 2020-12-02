@@ -43,7 +43,7 @@ export class CommissionCreationSub {
                     .setURL(`https://ffxivteamcraft.com/commission/${commission.$key}`)
                     .addField('Server', commission.server, true)
                     .addField('Price', price, true)
-                    .addField('Has all materials', commission.includesMaterials, true)
+                    .addField('Has all materials', commission.includesMaterials.toString(), true)
                     .addField('Tags', commission.tags.join(', '), true)
                     .addField('Items', commission.items
                         .map(item => ({...item, name: itemNames[item.id]}))
