@@ -1,6 +1,7 @@
 .idea
 dist
 process.json
+.cache.json
 # Logs
 logs
 *.log

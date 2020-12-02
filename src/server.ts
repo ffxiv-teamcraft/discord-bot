@@ -1,7 +1,8 @@
 import Discord, {Message} from "discord.js";
 import {BotConfig, config} from "./config/config";
 import {CommandHandler} from "./command_handler";
-import {CommissionCreationSub} from "./pub-sub/commission-creation-sub";
+import {CommissionSub} from "./pub-sub/commission-sub";
+import express from "express";
 
 validateConfig(config);
 
@@ -25,7 +26,34 @@ client.on("error", e => {
 
 client.login(config.token);
 
-new CommissionCreationSub(client).start();
+fetch('https://raw.githubusercontent.com/ffxiv-teamcraft/ffxiv-teamcraft/staging/apps/client/src/assets/data/items.json')
+    .then(res => res.json())
+    .then(itemNames => {
+        const commissionSub = new CommissionSub(client, itemNames);
+
+        const app = express();
+
+        app.post('/commission-created', (req, res) => {
+            commissionSub.commissionCreated(req.body);
+            res.status(201).end();
+        });
+
+        app.post('/commission-updated', (req, res) => {
+            commissionSub.commissionUpdated(req.body);
+            res.status(201).end();
+        });
+
+        app.post('/commission-deleted', (req, res) => {
+            commissionSub.commissionDeleted(req.body);
+            res.status(201).end();
+        });
+
+        app.listen(80);
+
+        console.log('HTTP Server started')
+    });
+
+
 
 /** Pre-startup validation of the bot config. */
 function validateConfig(config: BotConfig) {
