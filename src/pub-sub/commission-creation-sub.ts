@@ -38,6 +38,10 @@ export class CommissionCreationSub {
                 } else {
                     price = price.toLocaleString('en-US');
                 }
+                const items = commission.items
+                    .map(item => ({...item, name: itemNames[item.id]}))
+                    .filter(item => item.amount - item.done > 0 && item.name !== undefined)
+                    .map(item => ` - **${item.name.en}** x${item.amount - item.done}`);
                 const embed = new MessageEmbed()
                     .setTitle(commission.name)
                     .setURL(`https://ffxivteamcraft.com/commission/${commission.$key}`)
@@ -45,11 +49,7 @@ export class CommissionCreationSub {
                     .addField('Price', price, true)
                     .addField('Has all materials', commission.includesMaterials.toString(), true)
                     .addField('Tags', commission.tags.join(', '), true)
-                    .addField('Items', commission.items
-                        .map(item => ({...item, name: itemNames[item.id]}))
-                        .filter(item => item.amount - item.done > 0 && item.name !== undefined)
-                        .map(item => ` - **${item.name.en}** x${item.amount - item.done}`)
-                    )
+                    .addField('Items', items.length > 0 ? items : 'No items yet')
                     .setFooter(
                         "ffxiv-teamcraft",
                         "https://ffxivteamcraft.com/assets/logo.png"
