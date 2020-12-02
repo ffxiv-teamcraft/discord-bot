@@ -49,7 +49,7 @@ fetch('https://raw.githubusercontent.com/ffxiv-teamcraft/ffxiv-teamcraft/staging
             res.status(201).end();
         });
 
-        app.listen(80);
+        app.listen(8080);
 
         console.log('HTTP Server started')
     });
