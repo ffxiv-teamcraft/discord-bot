@@ -91,9 +91,10 @@ export class CommissionSub {
             .setTitle(commission.name)
             .setURL(`https://ffxivteamcraft.com/commission/${commission.$key}`)
             .addField('Server', commission.server, true)
-            .addField('Price', price, true)
+            .addField('Payment', price, true)
             .addField('Has all materials', commission.includesMaterials.toString(), true)
             .addField('Tags', commission.tags.join(', '), true)
+            .addField('Description', commission.description)
             .addField(`Items (${items.length})`, items.length > 0 ? items : 'No items yet')
             .setFooter(
                 "ffxiv-teamcraft",
