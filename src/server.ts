@@ -35,16 +35,19 @@ fetch('https://raw.githubusercontent.com/ffxiv-teamcraft/ffxiv-teamcraft/staging
         const app = express();
 
         app.post('/commission-created', (req, res) => {
+            console.log('Received event created', req.body);
             commissionSub.commissionCreated(req.body);
             res.status(201).end();
         });
 
         app.post('/commission-updated', (req, res) => {
+            console.log('Received event updated', req.body);
             commissionSub.commissionUpdated(req.body);
             res.status(201).end();
         });
 
         app.post('/commission-deleted', (req, res) => {
+            console.log('Received event deleted', req.body);
             commissionSub.commissionDeleted(req.body);
             res.status(201).end();
         });
