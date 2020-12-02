@@ -3,6 +3,7 @@ import {BotConfig, config} from "./config/config";
 import {CommandHandler} from "./command_handler";
 import {CommissionSub} from "./pub-sub/commission-sub";
 import express from "express";
+import fetch from "node-fetch";
 
 validateConfig(config);
 
@@ -52,7 +53,6 @@ fetch('https://raw.githubusercontent.com/ffxiv-teamcraft/ffxiv-teamcraft/staging
 
         console.log('HTTP Server started')
     });
-
 
 
 /** Pre-startup validation of the bot config. */
