@@ -49,7 +49,7 @@ export class CommissionCreationSub {
                     .addField('Price', price, true)
                     .addField('Has all materials', commission.includesMaterials.toString(), true)
                     .addField('Tags', commission.tags.join(', '), true)
-                    .addField('Items', items.length > 0 ? items : 'No items yet')
+                    .addField(`Items (${items.length})`, items.length > 0 ? items : 'No items yet')
                     .setFooter(
                         "ffxiv-teamcraft",
                         "https://ffxivteamcraft.com/assets/logo.png"
