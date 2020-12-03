@@ -24,7 +24,7 @@ export class CommissionSub {
     }
 
     public commissionCreated(commission: any): void {
-        if (commission.totalItems > 0) {
+        if (commission.totalItems > 0 && this.cache.getItem(commission.$key) === undefined) {
             this.addMessage(commission);
         }
     }
@@ -99,7 +99,7 @@ export class CommissionSub {
             .addField('Server', commission.server, true)
             .addField('Payment', price, true)
             .addField('Has all materials', commission.includesMaterials.toString(), true)
-            .addField('Tags', commission.tags.join(', '), true)
+            .addField('Tags', commission.tags.length > 0 ? commission.tags.join(', ') : 'No tags', true)
             .addField('Description', commission.description)
             .addField(`Items (${items.length})`, items.length > 0 ? items : 'No items yet')
             .setFooter(
