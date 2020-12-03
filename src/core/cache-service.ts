@@ -32,6 +32,11 @@ export class CacheService {
         this.persist();
     }
 
+    public deleteItem(key: string): void {
+        delete this.cache[key];
+        this.persist();
+    }
+
     private persist(): void {
         fs.writeFileSync(CacheService.FILE_PATH, JSON.stringify(this.cache));
     }

@@ -42,10 +42,14 @@ export class CommissionSub {
                             message.edit(this.getEmbed(commission));
                             break;
                         case 1:
-                            message.delete({reason: 'Linked commission has been started'});
+                            message.delete({reason: 'Linked commission has been started'}).then(() => {
+                                this.cache.deleteItem(commission.$key);
+                            });
                             break;
                         case 2:
-                            message.delete({reason: 'Linked commission has been archived'});
+                            message.delete({reason: 'Linked commission has been archived'}).then(() => {
+                                this.cache.deleteItem(commission.$key);
+                            });
                             break;
                     }
                 });
@@ -58,7 +62,9 @@ export class CommissionSub {
         const channel = this.getChannel(commission);
         if (messageId && channel) {
             channel.messages.fetch(messageId).then(message => {
-                message.delete({reason: 'Linked commission was deleted'});
+                message.delete({reason: 'Linked commission was deleted'}).then(() => {
+                    this.cache.deleteItem(commission.$key);
+                });
             })
         }
     }
