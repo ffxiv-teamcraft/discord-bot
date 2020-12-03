@@ -2,8 +2,8 @@ import Discord, {Message} from "discord.js";
 import {BotConfig, config} from "./config/config";
 import {CommandHandler} from "./command_handler";
 import {CommissionSub} from "./pub-sub/commission-sub";
-import express from "express";
 import fetch from "node-fetch";
+import {PubSub} from "@google-cloud/pubsub";
 
 validateConfig(config);
 
@@ -27,34 +27,33 @@ client.on("error", e => {
 
 client.login(config.token);
 
+
+const pubsub = new PubSub({projectId: 'ffxivteamcraft'});
+const subscription = pubsub.topic('commissions-created').subscription('bot');
+
 fetch('https://raw.githubusercontent.com/ffxiv-teamcraft/ffxiv-teamcraft/staging/apps/client/src/assets/data/items.json')
     .then(res => res.json())
     .then(itemNames => {
         const commissionSub = new CommissionSub(client, itemNames);
 
-        const app = express();
+        subscription.on('message', message => {
+            message.ack();
+            const {event, commission} = JSON.parse(message.data.toString());
+            switch (event) {
+                case 'created':
+                    commissionSub.commissionCreated(commission);
+                    break;
+                case 'updated':
+                    commissionSub.commissionUpdated(commission);
+                    break;
+                case 'deleted':
+                    commissionSub.commissionDeleted(commission);
+                    break;
 
-        app.post('/commission-created', (req, res) => {
-            console.log('Received event created', req.body);
-            commissionSub.commissionCreated(req.body);
-            res.status(201).end();
+            }
         });
 
-        app.post('/commission-updated', (req, res) => {
-            console.log('Received event updated', req.body);
-            commissionSub.commissionUpdated(req.body);
-            res.status(201).end();
-        });
-
-        app.post('/commission-deleted', (req, res) => {
-            console.log('Received event deleted', req.body);
-            commissionSub.commissionDeleted(req.body);
-            res.status(201).end();
-        });
-
-        app.listen(8080);
-
-        console.log('HTTP Server started')
+        console.log('Pub/Sub listener started');
     });
 
 
