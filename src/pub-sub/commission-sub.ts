@@ -15,7 +15,8 @@ export class CommissionSub {
         猫小胖: '782287293712302081',
         莫古力: '782287319221796865',
         陆行鸟: '782287342563098646',
-        korea: '782635554259861530'
+        korea: '782635554259861530',
+        test: '784327491292102667'
     }
 
     private cache = CacheService.INSTANCE;
@@ -31,9 +32,9 @@ export class CommissionSub {
 
     public commissionUpdated(commission: any): void {
         const messageId = this.cache.getItem(commission.$key);
-        if (commission.totalItems > 0 && !messageId) {
+        if (commission.totalItems > 0 && !messageId && commission.status === 0) {
             this.addMessage(commission);
-        } else {
+        } else if (messageId) {
             const channel = this.getChannel(commission);
             if (channel) {
                 channel.messages.fetch(messageId).then(message => {

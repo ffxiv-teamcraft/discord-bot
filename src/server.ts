@@ -39,7 +39,7 @@ fetch('https://raw.githubusercontent.com/ffxiv-teamcraft/ffxiv-teamcraft/staging
         subscription.on('message', message => {
             message.ack();
             const {event, commission} = JSON.parse(message.data.toString());
-            console.log('New event received', event, commission.name);
+            console.log('New event received', event, commission.datacenter, commission.name);
             switch (event) {
                 case 'created':
                     commissionSub.commissionCreated(commission);
