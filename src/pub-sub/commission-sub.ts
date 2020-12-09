@@ -1,4 +1,4 @@
-import {Client, MessageEmbed, MessageOptions, TextChannel} from 'discord.js'
+import {Client, Message, MessageEmbed, MessageOptions, TextChannel} from 'discord.js'
 import {CacheService} from "../core/cache-service";
 
 export class CommissionSub {
@@ -73,7 +73,7 @@ export class CommissionSub {
     private addMessage(commission: any): void {
         const channel = this.getChannel(commission);
         if (channel) {
-            channel.send(this.getEmbed(commission)).then(message => {
+            channel.send(this.getEmbed(commission)).then((message: Message) => {
                 this.cache.setItem(commission.$key, message.id);
             });
         }
