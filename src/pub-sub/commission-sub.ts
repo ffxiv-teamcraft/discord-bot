@@ -1,4 +1,4 @@
-import {Client, MessageEmbed, TextChannel} from 'discord.js'
+import {Client, MessageEmbed, MessageOptions, TextChannel} from 'discord.js'
 import {CacheService} from "../core/cache-service";
 
 export class CommissionSub {
@@ -83,7 +83,7 @@ export class CommissionSub {
         return this.client.channels.cache.get(CommissionSub.CHANNELS[commission.datacenter.toLowerCase()]) as TextChannel;
     }
 
-    private getEmbed(commission: any): MessageEmbed {
+    private getEmbed(commission: any): MessageOptions {
         let price = commission.price;
         if (price <= 0) {
             price = 'To be discussed';
@@ -94,20 +94,23 @@ export class CommissionSub {
             .map(item => ({...item, name: this.itemNames[item.id]}))
             .filter(item => item.amount - item.done > 0 && item.name !== undefined)
             .map(item => ` - **${item.name.en}** x${item.amount - item.done}`);
-        return new MessageEmbed()
-            .setTitle(commission.name)
-            .setURL(`https://ffxivteamcraft.com/commission/${commission.$key}`)
-            .addField('Server', commission.server, true)
-            .addField('Payment', price, true)
-            .addField('Has all materials', commission.includesMaterials.toString(), true)
-            .addField('Tags', commission.tags.length > 0 ? commission.tags.join(', ') : 'No tags', true)
-            .addField('Description', commission.description)
-            .addField(`Items (${items.length})`, items.length > 0 ? items : 'No items yet')
-            .setFooter(
-                "ffxiv-teamcraft",
-                "https://ffxivteamcraft.com/assets/logo.png"
-            )
-            .setColor("#4880b1");
+        return {
+            content: '<@&786319001620840492>',
+            embed: new MessageEmbed()
+                .setTitle(commission.name)
+                .setURL(`https://ffxivteamcraft.com/commission/${commission.$key}`)
+                .addField('Server', commission.server, true)
+                .addField('Payment', price, true)
+                .addField('Has all materials', commission.includesMaterials.toString(), true)
+                .addField('Tags', commission.tags.length > 0 ? commission.tags.join(', ') : 'No tags', true)
+                .addField('Description', commission.description)
+                .addField(`Items (${items.length})`, items.length > 0 ? items : 'No items yet')
+                .setFooter(
+                    "ffxiv-teamcraft",
+                    "https://ffxivteamcraft.com/assets/logo.png"
+                )
+                .setColor("#4880b1")
+        };
     }
 
 }
