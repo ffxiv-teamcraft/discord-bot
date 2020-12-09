@@ -75,7 +75,7 @@ export class CommissionSub {
         if (channel) {
             channel.send(this.getEmbed(commission)).then((message: Message) => {
                 this.cache.setItem(commission.$key, message.id);
-            });
+            }).catch(e => console.error(e));
         }
     }
 
