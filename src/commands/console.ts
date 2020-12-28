@@ -1,5 +1,6 @@
 import {Command} from "./command";
 import {CommandContext} from "../models/command_context";
+import { MessageEmbed } from "discord.js"
 
 export class ConsoleCommand implements Command {
     commandNames = ["console", "devtools"];
@@ -12,7 +13,18 @@ export class ConsoleCommand implements Command {
     }
 
     async run(parsedUserCommand: CommandContext): Promise<void> {
-        await parsedUserCommand.originalMessage.channel.send("**To Open Dev Tools in the desktop app:** Go to the top right where your profile is then Settings > Desktop > Dev Tools. Click the console tab. \n **Website:** F12 on the keyboard. Click the console tab. ");
+        const embed = new MessageEmbed()
+        .setTitle("How to open the console")
+        .setDescription("Please open the console and take a screenshot of it to post in <#639503745176174592>.")
+        .addField("Website", "Please press F12 on the keyboard and click the ``console`` tab.")
+        .addField("Desktop App", "Please navigate to your Profile > Settings > Desktop > Open Dev Tools and click the ``console`` tab.")
+        .addField("I can't get to my profile. How am I supposed to get to the console?", "``CTRL + SHIFT + I`` will also open the dev tools allowing you to still get to the console if the app is not doing anything.")
+        .setFooter(
+          "ffxiv-teamcraft",
+          "https://ffxivteamcraft.com/assets/logo.png"
+        )
+        .setColor("#4880b1");
+        await parsedUserCommand.originalMessage.channel.send(embed);
     }
 
     hasPermissionToRun(parsedUserCommand: CommandContext): boolean {
