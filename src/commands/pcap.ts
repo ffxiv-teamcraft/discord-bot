@@ -20,6 +20,7 @@ export class PcapCommand implements Command {
         .addField("Are you using the Desktop App?", "Packet captures only works on the desktop app. Please make sure you have it downloaded and installed before trying to use packet capture.")
         .addField("If the above are true, please do the following.", "Open the ``!!console``, type ``window.debugPackets = true;`` and move in game/tp to a new zone. Is there any output?")
         .addField("There was no output! Please help!", "Try to re-install [npcap](https://nmap.org/npcap/dist/npcap-1.10.exe).")
+        .addField("Still nothing? Are you using a vpn?", "Go to settings, enable `RawSocket` capture mode, and restart TC as admin.")
         .addField("Still not working. :(", "Please try a ``!!dirtyinstall`` to make sure that you don't have old files related to TC laying around mucking things up.")
         .addField("Still nothing. Am I hopeless?", "The last thing you can do for us to help you is post your ``log.log`` to <#639503745176174592> alongside details regarding your issue. It is located in ``%appdata%/ffxiv-teamcraft``.")
         .setFooter(
