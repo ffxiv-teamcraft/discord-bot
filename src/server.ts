@@ -1,9 +1,10 @@
-import Discord, {Message} from "discord.js";
+import Discord, {Message, MessageEmbed, TextChannel} from "discord.js";
 import {BotConfig, config} from "./config/config";
 import {CommandHandler} from "./command_handler";
 import {CommissionSub} from "./pub-sub/commission-sub";
 import fetch from "node-fetch";
 import {PubSub} from "@google-cloud/pubsub";
+import {CacheService} from "./core/cache-service";
 
 validateConfig(config);
 
@@ -27,36 +28,64 @@ client.on("error", e => {
 
 client.login(config.token);
 
+if (process.env.GOOGLE_CLOUD_PROJECT) {
 
-const pubsub = new PubSub({projectId: 'ffxivteamcraft'});
-const subscription = pubsub.topic('commissions-created').subscription('bot');
+    const pubsub = new PubSub({projectId: 'ffxivteamcraft'});
+    const commissionsCreatedTopic = pubsub.topic('commissions-created').subscription('bot');
+    const patreonPledgesTopic = pubsub.topic('patreon-pledges').subscription('patreon-pledges-sub');
 
-fetch('https://raw.githubusercontent.com/ffxiv-teamcraft/ffxiv-teamcraft/staging/apps/client/src/assets/data/items.json')
-    .then(res => res.json())
-    .then(itemNames => {
-        const commissionSub = new CommissionSub(client, itemNames);
+    fetch('https://raw.githubusercontent.com/ffxiv-teamcraft/ffxiv-teamcraft/staging/apps/client/src/assets/data/items.json')
+        .then(res => res.json())
+        .then(itemNames => {
+            const commissionSub = new CommissionSub(client, itemNames);
 
-        subscription.on('message', message => {
-            message.ack();
-            const {event, commission} = JSON.parse(message.data.toString());
-            console.log('New event received', event, commission.datacenter, commission.name);
-            switch (event) {
-                case 'created':
-                    commissionSub.commissionCreated(commission);
-                    break;
-                case 'updated':
-                    commissionSub.commissionUpdated(commission);
-                    break;
-                case 'deleted':
-                    commissionSub.commissionDeleted(commission);
-                    break;
+            commissionsCreatedTopic.on('message', message => {
+                message.ack();
+                const {event, commission} = JSON.parse(message.data.toString());
+                console.log('New event received', event, commission.datacenter, commission.name);
+                switch (event) {
+                    case 'created':
+                        commissionSub.commissionCreated(commission);
+                        break;
+                    case 'updated':
+                        commissionSub.commissionUpdated(commission);
+                        break;
+                    case 'deleted':
+                        commissionSub.commissionDeleted(commission);
+                        break;
 
-            }
+                }
+            });
+
+            console.log('Pub/Sub listener started');
         });
 
-        console.log('Pub/Sub listener started');
-    });
+    const generalChannel = client.channels.cache.get('618892523456299008') as TextChannel;
+    patreonPledgesTopic.on('message', message => {
+        message.ack();
+        const {amountDisplay, yearly, id} = JSON.parse(message.data.toString());
+        if (CacheService.INSTANCE.getItem(id) === undefined) {
+            // Patreon sometimes sends two requests because idk, so we're gonna avoid this here
+            CacheService.INSTANCE.setItem(id, 'true');
+            setTimeout(() => {
+                CacheService.INSTANCE.deleteItem(id);
+            }, 30000);
+            const embed = new MessageEmbed()
+                .setTitle('New patreon pledge')
+                .setURL('https://www.patreon.com/bePatron?u=702160')
+                .setDescription(`Someone just pledged $${amountDisplay} ${yearly ? 'per year' : 'per month'} on patreon, Yay !`)
+                .setFooter(
+                    "patreon",
+                    "https://c5.patreon.com/external/logo/downloads_logomark_color_on_coral.png"
+                )
+                .setColor("#F96854");
 
+            generalChannel.send(embed).then(() => {
+                console.log('Notified sub', amountDisplay, yearly, id);
+            });
+        }
+    })
+}
 
 /** Pre-startup validation of the bot config. */
 function validateConfig(config: BotConfig) {
