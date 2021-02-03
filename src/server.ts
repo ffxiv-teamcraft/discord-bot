@@ -58,33 +58,36 @@ fetch('https://raw.githubusercontent.com/ffxiv-teamcraft/ffxiv-teamcraft/staging
         console.log('Pub/Sub listener started');
     });
 
-const generalChannel = client.channels.cache.get('618892523456299008') as TextChannel;
-patreonPledgesTopic.on('message', message => {
-    message.ack();
-    const {amountDisplay, yearly, id} = JSON.parse(message.data.toString());
-    if (CacheService.INSTANCE.getItem(id) === undefined) {
-        // Patreon sometimes sends two requests because idk, so we're gonna avoid this here
-        CacheService.INSTANCE.setItem(id, 'true');
-        setTimeout(() => {
-            CacheService.INSTANCE.deleteItem(id);
-        }, 30000);
-        const embed = new MessageEmbed()
-            .setTitle('New patreon pledge')
-            .setURL('https://www.patreon.com/bePatron?u=702160')
-            .setDescription(`Someone just pledged $${amountDisplay} ${yearly ? 'per year' : 'per month'} on patreon, Yay !`)
-            .setFooter(
-                "patreon",
-                "https://c5.patreon.com/external/logo/downloads_logomark_color_on_coral.png"
-            )
-            .setColor("#F96854");
+client.channels.fetch('618892523456299008').then(
+    (generalChannel: TextChannel) => {
+        patreonPledgesTopic.on('message', message => {
+            message.ack();
+            const {amountDisplay, yearly, id} = JSON.parse(message.data.toString());
+            if (CacheService.INSTANCE.getItem(id) === undefined) {
+                // Patreon sometimes sends two requests because idk, so we're gonna avoid this here
+                CacheService.INSTANCE.setItem(id, 'true');
+                setTimeout(() => {
+                    CacheService.INSTANCE.deleteItem(id);
+                }, 30000);
+                const embed = new MessageEmbed()
+                    .setTitle('New patreon pledge')
+                    .setURL('https://www.patreon.com/bePatron?u=702160')
+                    .setDescription(`Someone just pledged $${amountDisplay} ${yearly ? 'per year' : 'per month'} on patreon, Yay !`)
+                    .setFooter(
+                        "patreon",
+                        "https://c5.patreon.com/external/logo/downloads_logomark_color_on_coral.png"
+                    )
+                    .setColor("#F96854");
 
-        generalChannel.send(embed).then(() => {
-            console.log('Notified sub', amountDisplay, yearly, id);
-        });
+                generalChannel.send(embed).then(() => {
+                    console.log('Notified sub', amountDisplay, yearly, id);
+                });
+            }
+        })
+
+        console.log('Patreon listener started', generalChannel.id);
     }
-
-    console.log('Patreon listener started', generalChannel.id);
-})
+);
 
 /** Pre-startup validation of the bot config. */
 function validateConfig(config: BotConfig) {
