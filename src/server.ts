@@ -59,7 +59,7 @@ fetch('https://raw.githubusercontent.com/ffxiv-teamcraft/ffxiv-teamcraft/staging
     });
 
 client.on('ready', () => {
-    client.channels.fetch('618892523456299008').then(
+    client.channels.fetch('355013337748209669').then(
         (generalChannel: TextChannel) => {
             patreonPledgesTopic.on('message', message => {
                 message.ack();
@@ -73,7 +73,7 @@ client.on('ready', () => {
                     const embed = new MessageEmbed()
                         .setTitle('New patreon pledge')
                         .setURL('https://www.patreon.com/bePatron?u=702160')
-                        .setDescription(`Someone just pledged $${amountDisplay} ${yearly ? 'per year' : 'per month'} on patreon, Yay !`)
+                        .setDescription(`Someone just pledged $${amountDisplay} ${yearly ? 'per year' : 'per month'} on patreon, Yay!`)
                         .setFooter(
                             "patreon",
                             "https://c5.patreon.com/external/logo/downloads_logomark_color_on_coral.png"
