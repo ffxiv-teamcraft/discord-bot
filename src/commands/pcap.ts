@@ -15,9 +15,10 @@ export class PcapCommand implements Command {
     async run(parsedUserCommand: CommandContext): Promise<void> {
         const embed = new MessageEmbed()
         .setTitle("Troubleshooting Packet Capture")
-        .setDescription("**Attention PS4 Players** Packet capture does not work for the PS4, only on PC.")
+        .setDescription("**Attention PS4 Players** Packet capture does not work for the PS4, only on PC.\nAny steps using ``!!commands`` are bot commands meant to be used in <#639503745176174592> for further instructions.")
         .addField("Is the app updated?", "Teamcraft needs to be on the latest version of the app for packet capture to work. Please check #announcements for the latest version. If you are not up to date please do so before continuing.")
         .addField("Are you using the Desktop App?", "Packet captures only works on the desktop app. Please make sure you have it downloaded and installed before trying to use packet capture.")
+        .addField("Have you restarted TC?", "As of version 8.0.12, PCAP no longer requires a client update to update OPCodes. Restarting TC can resolve issues related to this.")
         .addField("If the above are true, please do the following.", "Open the ``!!console``, type ``window.debugPackets = true;`` and move in game/tp to a new zone. Is there any output?")
         .addField("There was no output! Please help!", "Try to re-install [npcap](https://nmap.org/npcap/dist/npcap-1.10.exe).")
         .addField("Still nothing? Are you using a vpn?", "Go to settings, enable `RawSocket` capture mode, and restart TC as admin.")
