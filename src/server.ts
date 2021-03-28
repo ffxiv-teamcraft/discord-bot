@@ -59,7 +59,7 @@ fetch('https://raw.githubusercontent.com/ffxiv-teamcraft/ffxiv-teamcraft/staging
     });
 
 client.on('ready', () => {
-    client.channels.fetch('355013337748209669').then(
+    client.channels.fetch('825664183797284884').then(
         (generalChannel: TextChannel) => {
             patreonPledgesTopic.on('message', message => {
                 message.ack();
