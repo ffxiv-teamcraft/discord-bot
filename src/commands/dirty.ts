@@ -19,7 +19,8 @@ export class DirtyInstallCommand implements Command {
         .addField("Close all instances of Teamcraft", "Open your task manager and please end all teamcraft processes.")
         .addField("Clean up old local files", "Press ``WIN+R`` and type ``%localappdata%``. Locate the ``ffxiv-teamcraft`` folder and delete it. Find it again in the ``programs`` folder and delete it.")
         .addField("Clean up old roaming files", "Press ``WIN+R`` and type ``%appdata%``. Locate the ``ffxiv-teamcraft`` folder and delete it.")
-        .addField("Uninstall", "Please open ``Control Panel\\Programs\\Programs and Features`` and make sure that TC is not listed. If it is please click it and click uninstall. It might fuss about the app not being able to be found. Ignore this and click ok.")
+        .addField("Uninstall Teamcraft", "Please open ``Control Panel\\Programs\\Programs and Features`` and make sure that TC is not listed. If it is please click it and click uninstall. It might fuss about the app not being able to be found. Ignore this and click ok.")
+        .addField("Uninstall win10pcap", "If you have win10pcap installed, please uninstall this before reinstalling Teamcraft or NPcap.")
         .addField("Restart Computer", "Restart your computer just to be certain that no Teamcraft related processes are running.")
         .addField("Download and Reinstall", "[Download the latest version of the app and install it.](https://ffxivteamcraft.com/desktop)")
         .setFooter(
