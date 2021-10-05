@@ -19,6 +19,7 @@ import { DirtyInstallCommand } from "./commands/dirty";
 import { FixTimeCommand } from "./commands/time";
 import { MemberCountCommand } from "./commands/membercount";
 import { PcapCommand } from "./commands/pcap";
+import { IgnoredCommand } from "./commands/ignored";
 
 /** Handler for bot commands issued by users. */
 export class CommandHandler {
@@ -42,7 +43,8 @@ export class CommandHandler {
             FixTimeCommand,
             TimezonesCommand,
             MemberCountCommand,
-            PcapCommand
+            PcapCommand,
+            IgnoredCommand
             
         ];
 
