@@ -16,7 +16,7 @@ export type BotConfig = {
 
 export let config: BotConfig = {
     token: process.env.DISCORD_TOKEN,
-    prefix: "!!",
+    prefix: process.env.PREFIX || "!!",
     botOwnerRoleName: "TeamcraftBot",
     enableReactions: true,
 };
