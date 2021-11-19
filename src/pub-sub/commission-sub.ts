@@ -99,12 +99,14 @@ export class CommissionSub {
             embed: new MessageEmbed()
                 .setTitle(commission.name || 'No name')
                 .setURL(`https://ffxivteamcraft.com/commission/${commission.$key}`)
+                .setDescription(`**Items (${items.length})**
+                ${items.length > 0 ? items : 'No items yet'}
+                `)
                 .addField('Server', commission.server || 'Unknown server', true)
                 .addField('Payment', price, true)
                 .addField('Has all materials', (commission.includesMaterials || false).toString(), true)
                 .addField('Tags', commission.tags.length > 0 ? commission.tags.join(', ') : 'No tags', true)
                 .addField('Description', commission.description || 'No description')
-                .addField(`Items (${items.length})`, items.length > 0 ? items : 'No items yet')
                 .setFooter(
                     "ffxiv-teamcraft",
                     "https://ffxivteamcraft.com/assets/logo.png"
