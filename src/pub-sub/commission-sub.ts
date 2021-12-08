@@ -96,7 +96,8 @@ export class CommissionSub {
         const items = commission.items
             .map(item => ({...item, name: this.itemNames[item.id]}))
             .filter(item => item.amount - item.done > 0 && item.name !== undefined)
-            .map(item => ` - **${item.name.en}** x${item.amount - item.done}`);
+            .map(item => ` - **${item.name.en}** x${item.amount - item.done}`)
+            .join('\n');
         return {
             content: '<@&786319001620840492>',
             embed: new MessageEmbed()
