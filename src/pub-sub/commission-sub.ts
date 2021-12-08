@@ -80,7 +80,10 @@ export class CommissionSub {
     }
 
     private getChannel(commission: any): TextChannel | undefined {
-        return this.client.channels.cache.get(CommissionSub.CHANNELS[commission.datacenter.toLowerCase()]) as TextChannel;
+        if (commission.datacenter) {
+            return this.client.channels.cache.get(CommissionSub.CHANNELS[commission.datacenter.toLowerCase()]) as TextChannel;
+        }
+        return undefined;
     }
 
     private getEmbed(commission: any): MessageOptions {
