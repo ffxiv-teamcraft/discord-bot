@@ -15,7 +15,7 @@ export class FixTimeCommand implements Command {
     async run(parsedUserCommand: CommandContext): Promise<void> {
         const embed = new MessageEmbed()
         .setTitle("Troubleshooting Alarm Times")
-        .setDescription("If you are having issues with timed node alarms being early or late then your computers clock may be off! Check [Time.is](https://time.is/) to see how off your windows clock is.\n\nYou can just disable and re-enable windows auto time sync and it will fix itself.")
+        .setDescription("If you are having issues with timed node alarms being early or late, then your computer's clock may be off! Check [Time.is](https://time.is/) to see how off your Windows clock is.\n\nYou can just disable and re-enable Windows auto time sync and it will fix itself.")
         .setFooter(
           "ffxiv-teamcraft",
           "https://ffxivteamcraft.com/assets/logo.png"
