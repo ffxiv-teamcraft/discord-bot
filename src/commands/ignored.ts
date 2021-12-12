@@ -12,7 +12,7 @@ export class IgnoredCommand implements Command {
     }
 
     async run(parsedUserCommand: CommandContext): Promise<void> {
-        let txt = `**To clean up potentially ignored or unlinked characters please do the following:**\n - Go to settings, reset linked characters and ignored characters.\n - Restart TC.\n - Go to inventory page, reset all inventories.\n - In game, sort your inventory. *Make sure at least one item moves.* This should trigger a popup to select your character in TC.\n - Once it's selected, teleport to a new zone. *It has to be a different one than you are currently in for example, limsa to eulmore.`
+        let txt = `**To clean up potentially ignored or unlinked characters, please do the following:**\n - Go to Settings, Desktop, Reset ignored characters and Reset linked characters.\n - Restart TC.\n - Go to the Inventory page and click the button to Reset all inventories.\n - In game, sort your inventory. *Make sure at least one item moves.* This should trigger a popup to select your character in TC.\n - Once it's selected, teleport to a new zone. *It has to be a different zone than the one you are currently in -- for example, Limsa to Eulmore.`
         await parsedUserCommand.originalMessage.channel.send(txt);
     }
 
