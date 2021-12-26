@@ -53,7 +53,7 @@ export class CommissionSub {
                             });
                             break;
                     }
-                });
+                }).catch(e => console.warn(e));
             }
         }
     }
@@ -66,7 +66,7 @@ export class CommissionSub {
                 message.delete({reason: 'Linked commission was deleted'}).then(() => {
                     this.cache.deleteItem(commission.$key);
                 });
-            })
+            }).catch(e => console.warn(e))
         }
     }
 
