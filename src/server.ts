@@ -40,6 +40,9 @@ fetch('https://raw.githubusercontent.com/ffxiv-teamcraft/ffxiv-teamcraft/staging
         commissionsCreatedTopic.on('message', message => {
             message.ack();
             const {event, commission} = JSON.parse(message.data.toString());
+            if (!commission.datacenter) {
+                return;
+            }
             console.log('New event received', event, commission.datacenter, commission.name);
             switch (event) {
                 case 'created':
