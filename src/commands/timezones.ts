@@ -11,6 +11,7 @@ export class TimezonesCommand implements Command {
 
     readonly modsTimezones = [
         {name: 'Miu', timezone: 'Europe/Paris'},
+        {name: 'Venili', timezone: 'Europe/Berlin'},
         {name: 'Acchan', timezone: 'Australia/Melbourne'},
         {name: 'Qih', timezone: 'America/Los_Angeles'},
         {name: 'Tataru', timezone: 'Europe/London'},
