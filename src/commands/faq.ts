@@ -23,6 +23,7 @@ export class FaqCommand implements Command {
 					.addField('Crafting', 'Crafting meld guides can be found [here.](https://guides.ffxivteamcraft.com/guide/crafting-melding-guide)')
 					.addField('Gathering', 'Gathering meld guides can be found [here.](https://guides.ffxivteamcraft.com/guide/gathering-melding-guide)')
 					.setFooter('ffxiv-teamcraft', 'https://ffxivteamcraft.com/assets/logo.png');
+				await parsedUserCommand.originalMessage.reply(embed);
 				break;
 
 			case 'leveling':
@@ -32,6 +33,7 @@ export class FaqCommand implements Command {
 					.addField('Crafting', 'Crafting leveling guides can be found [here.](https://guides.ffxivteamcraft.com/guide/crafting-leveling-guide)')
 					.addField('Gathering', 'Gathering leveling guides can be found [here.](https://guides.ffxivteamcraft.com/guide/gathering-leveling-guide)')
 					.setFooter('ffxiv-teamcraft', 'https://ffxivteamcraft.com/assets/logo.png');
+				await parsedUserCommand.originalMessage.reply(embed);
 				break;
 
 			case 'rotations':
@@ -43,9 +45,12 @@ export class FaqCommand implements Command {
 					.addField('Crafting', 'Crafting rotation guides can be found [here.](https://guides.ffxivteamcraft.com/guide/endgame-crafting-rotations)')
 					.addField('Gathering', 'Gathering rotation guides can be found [here.](https://guides.ffxivteamcraft.com/guide/gathering-node-rotations)')
 					.setFooter('ffxiv-teamcraft', 'https://ffxivteamcraft.com/assets/logo.png');
+				await parsedUserCommand.originalMessage.reply(embed);
 				break;
+
+			default:
+				await parsedUserCommand.originalMessage.reply('Invalid Argument, Try `rotations`, `leveling`, or `melding`.');
 		}
-		await parsedUserCommand.originalMessage.reply(embed);
 	}
 
 	hasPermissionToRun(parsedUserCommand: CommandContext): boolean {
