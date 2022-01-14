@@ -20,6 +20,7 @@ import { FixTimeCommand } from "./commands/time";
 import { MemberCountCommand } from "./commands/membercount";
 import { PcapCommand } from "./commands/pcap";
 import { IgnoredCommand } from "./commands/ignored";
+import { FaqCommand } from "./commands/faq";
 
 /** Handler for bot commands issued by users. */
 export class CommandHandler {
@@ -44,7 +45,8 @@ export class CommandHandler {
             TimezonesCommand,
             MemberCountCommand,
             PcapCommand,
-            IgnoredCommand
+            IgnoredCommand,
+            FaqCommand,
             
         ];
 
