@@ -75,7 +75,7 @@ export class CommandHandler {
             await matchedCommand.run(commandContext).then(() => {
                 reactor.success(message);
             }).catch(reason => {
-                reactor.failure(reason.message);
+                reactor.failure(message);
             });
         }
     }
