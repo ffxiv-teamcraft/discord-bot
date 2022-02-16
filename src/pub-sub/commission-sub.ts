@@ -16,7 +16,7 @@ export class CommissionSub {
         莫古力: '782287319221796865',
         陆行鸟: '782287342563098646',
         korea: '782635554259861530',
-        test: '784327491292102667'
+        materia: '943576832404508752'
     }
 
     private cache = CacheService.INSTANCE;
