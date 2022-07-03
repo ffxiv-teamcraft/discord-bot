@@ -42,13 +42,31 @@ export class VpnCommand implements Command {
 				.addField("Packet Capture:", useRawSocketBro)
 			break;
 
+		case 'mullvad':
+			embed
+				.setTitle('Mullvad')
+				.setDescription("Instructions for Mullvad")
+				.addField("Warning:", "Mullvad's AdBlocker feature will break the connection to the Teamcraft database.")
+				.addField("How To:", "Open Mullvad and disable the ad blocking feature. Mullvad's website has good alternatives that won't break Teamcraft.")
+				.addField("Packet Capture:", useRawSocketBro);
+			break;
+
+		case 'openvpn':
+		case 'wireguard':
+			embed
+				.setTitle('OpenVPN and Wireguard')
+				.setDescription("Instructions for OpenVPN and Wireguard based VPNs")
+				.addField("Warning:", "OpenVPN and Wireguard encapsulate packets, hiding them from Teamcraft. You *must* use Raw Socket mode for packet capture.")
+				.addField("Packet Capture:", useRawSocketBro);
+				break;
+
 		default:
 			embed
 				.setTitle('VPN')
 				.setDescription("Packet Capture instructions for VPN users.")
-				.addField("About VPNs and Teamcraft", "Teamcraft needs to see packets to parse them. Most VPNs hide packet contents for privacy, so Teamcraft isn't able to see them.")
-				.addField("Generic VPN Instructions", "If your VPN is based on L2TP, it should Just Work™ in Teamcraft. If it's based on Wireguard, OpenVPN, or something more exotic you need to set Teamcraft to RawSocket mode in settings.")
-				.addField("Specific VPN Instructions", "We have extra help for a few VPNs. You can see them by putting the VPN name after the command, such as '!!vpn mudfish'. The following list of VPNs have special instructions: ExitLag, Mudfish, NordVPN.");
+				.addField("About VPNs and Teamcraft:", "Teamcraft needs to see packets to parse them. Most VPNs hide packet contents for privacy, so Teamcraft isn't able to see them.")
+				.addField("Generic VPN Instructions:", "If your VPN is based on L2TP, it should Just Work™ in Teamcraft. If it's based on Wireguard, OpenVPN, or something more exotic you need to set Teamcraft to Raw Socket mode in settings.")
+				.addField("Specific VPN Instructions:", "We have extra help for some VPNs. You can see them by putting the VPN name after the command, such as '!!vpn mudfish'. The following list of VPNs have special instructions: ExitLag, Mudfish, Mullvad, NordVPN, OpenVPN, Wireguard.");
 			break;
 				
 		}
