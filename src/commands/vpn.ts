@@ -13,6 +13,8 @@ export class VpnCommand implements Command {
 		const args = parsedUserCommand.originalMessage.content.slice(2).split(/ +/);
 		const embed = new MessageEmbed();
 
+		const useRawSocketBro = "In Teamcraft settings, set packet capture mode to Raw Socket."
+
 		switch(args[1]) {
 		case 'nord':
 		case 'nordvpn':
@@ -20,7 +22,8 @@ export class VpnCommand implements Command {
 				.setTitle('NordVPN')
 				.setDescription("Instructions for NordVPN")
 				.addField("Warning:", "NordVPN cannot work with Teamcraft if the privacy features are active.")
-				.addField("How To:", "Open NordVPN and click the gear in the top right to open settings. On the General tab, disable CyberSec.");
+				.addField("How To:", "Open NordVPN and click the gear in the top right to open settings. On the General tab, disable CyberSec.")
+				.addField("Packet Capture:", useRawSocketBro);
 			break;
 
 		case 'mudfish':
@@ -35,7 +38,8 @@ export class VpnCommand implements Command {
 			embed
 				.setTitle('NordVPN')
 				.setDescription("Instructions for ExitLag")
-				.addField("Warning:", "ExitLag does not work with Teamcraft due to how it changes packet structure. You *must* use RawSocket mode.")
+				.addField("Warning:", "ExitLag does not work with Teamcraft due to how it changes packet structure. You *must* use Raw Socket mode for packet capture.")
+				.addField("Packet Capture:", useRawSocketBro)
 			break;
 
 		default:
