@@ -15,7 +15,7 @@ export class VpnCommand implements Command {
 
 		const useRawSocketBro = "In Teamcraft settings, set packet capture mode to Raw Socket."
 
-		switch(args[1]) {
+		switch(args[1].toLowerCase()) {
 		case 'nord':
 		case 'nordvpn':
 			embed
