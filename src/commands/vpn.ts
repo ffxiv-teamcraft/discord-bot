@@ -58,7 +58,7 @@ export class VpnCommand implements Command {
 				.setDescription("Instructions for OpenVPN and Wireguard based VPNs")
 				.addField("Warning:", "OpenVPN and Wireguard encapsulate packets, hiding them from Teamcraft. You *must* use Raw Socket mode for packet capture.")
 				.addField("Packet Capture:", useRawSocketBro);
-				break;
+			break;
 
 		default:
 			embed
