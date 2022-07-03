@@ -36,7 +36,7 @@ export class VpnCommand implements Command {
 
 		case 'exitlag':
 			embed
-				.setTitle('NordVPN')
+				.setTitle('ExitLag')
 				.setDescription("Instructions for ExitLag")
 				.addField("Warning:", "ExitLag does not work with Teamcraft due to how it changes packet structure. You *must* use Raw Socket mode for packet capture.")
 				.addField("Packet Capture:", useRawSocketBro)
