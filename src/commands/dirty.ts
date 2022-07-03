@@ -1,6 +1,6 @@
 import {Command} from "./command";
 import {CommandContext} from "../models/command_context";
-import { MessageEmbed } from "discord.js";
+import {MessageEmbed} from "discord.js";
 
 export class DirtyInstallCommand implements Command {
     commandNames = ["dirtyinstall", "cleanreinstall"];
