@@ -63,7 +63,7 @@ export class VpnCommand implements Command {
 		default:
 			embed
 				.setTitle('VPN')
-				.setDescription("Packet Capture instructions for VPN users.")
+				.setDescription("Packet Capture and Teamcraft compatibility instructions for VPN users")
 				.addField("About VPNs and Teamcraft:", "Teamcraft needs to see packets to parse them. Most VPNs hide packet contents for privacy, so Teamcraft isn't able to see them.")
 				.addField("Generic VPN Instructions:", "If your VPN is based on L2TP, it should Just Work™ in Teamcraft. If it's based on Wireguard, OpenVPN, or something more exotic you need to set Teamcraft to Raw Socket mode in settings.")
 				.addField("Specific VPN Instructions:", "We have extra help for some VPNs. You can see them by putting the VPN name after the command, such as '!!vpn mudfish'. The following list of VPNs have special instructions: ExitLag, Mudfish, Mullvad, NordVPN, OpenVPN, Wireguard.");
