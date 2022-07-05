@@ -21,6 +21,7 @@ import {MemberCountCommand} from "./commands/membercount";
 import {PcapCommand} from "./commands/pcap";
 import {IgnoredCommand} from "./commands/ignored";
 import {FaqCommand} from "./commands/faq";
+import {VpnCommand} from "./commands/vpn";
 
 /** Handler for bot commands issued by users. */
 export class CommandHandler {
@@ -47,6 +48,7 @@ export class CommandHandler {
             PcapCommand,
             IgnoredCommand,
             FaqCommand,
+            VpnCommand,
             
         ];
 
