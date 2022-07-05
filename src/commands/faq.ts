@@ -1,6 +1,6 @@
-import { Command } from './command';
-import { CommandContext } from '../models/command_context';
-import { MessageEmbed } from 'discord.js';
+import {Command} from './command';
+import {CommandContext} from '../models/command_context';
+import {MessageEmbed} from 'discord.js';
 
 export class FaqCommand implements Command {
 	commandNames = ['faq'];
