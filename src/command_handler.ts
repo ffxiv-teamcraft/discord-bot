@@ -15,12 +15,12 @@ import {RotationHelpCommand} from "./commands/rotation-help";
 import {BugTemplateCommand} from "./commands/bugtemplate";
 import {OpenExternalCommand} from "./commands/opendesktop";
 import {TimezonesCommand} from "./commands/timezones";
-import { DirtyInstallCommand } from "./commands/dirty";
-import { FixTimeCommand } from "./commands/time";
-import { MemberCountCommand } from "./commands/membercount";
-import { PcapCommand } from "./commands/pcap";
-import { IgnoredCommand } from "./commands/ignored";
-import { FaqCommand } from "./commands/faq";
+import {DirtyInstallCommand} from "./commands/dirty";
+import {FixTimeCommand} from "./commands/time";
+import {MemberCountCommand} from "./commands/membercount";
+import {PcapCommand} from "./commands/pcap";
+import {IgnoredCommand} from "./commands/ignored";
+import {FaqCommand} from "./commands/faq";
 
 /** Handler for bot commands issued by users. */
 export class CommandHandler {
