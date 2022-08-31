@@ -21,8 +21,8 @@ export class VpnCommand implements Command {
 			embed
 				.setTitle('NordVPN')
 				.setDescription("Instructions for NordVPN")
-				.addField("Warning:", "NordVPN cannot work with Teamcraft if the privacy features are active.")
-				.addField("How To:", "Open NordVPN and click the gear in the top right to open settings. On the General tab, disable CyberSec.")
+				.addField("Warning:", "NordVPN cannot work with Teamcraft if the Threat Protection features are active.")
+				.addField("How To:", "Open NordVPN and click the gear in the top right to open settings. On the General tab, either disable Threat Protection, or add exceptions for ffxivteamcraft.com , firebase.googleapis.com , firebaseio.com , etc.")
 				.addField("Packet Capture:", useRawSocketBro);
 			break;
 
