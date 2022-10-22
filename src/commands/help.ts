@@ -3,7 +3,7 @@ import {CommandContext} from "../models/command_context";
 import {config} from "../config/config";
 
 export class HelpCommand implements Command {
-    readonly commandNames = ["help", "halp", "hlep"];
+    readonly commandNames = ["help", "halp", "hlep","commands"];
 
     private commands: Command[];
 
