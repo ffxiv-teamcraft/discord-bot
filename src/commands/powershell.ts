@@ -9,7 +9,7 @@ export class PowershellCommand implements Command {
     }
 
     getHelpMessage(commandPrefix: string): string {
-        return `Use ${commandPrefix}powershell to explain how to add Powershell to the Windows PATH variable`;
+        return `Use ${commandPrefix}powershell to explain how to add Powershell to the Windows PATH variable.`;
     }
 
     async run(parsedUserCommand: CommandContext): Promise<void> {
