@@ -2,7 +2,7 @@ import {Command} from "./command";
 import {CommandContext} from "../models/command_context";
 import {MessageEmbed} from "discord.js"
 
-export class KasperskyCommand implements Command {
+export class MachinaWrapperCommand implements Command {
     commandNames = ["machinawrapper,antivirus"];
 
     constructor() {

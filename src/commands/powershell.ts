@@ -2,7 +2,7 @@ import {Command} from "./command";
 import {CommandContext} from "../models/command_context";
 import {MessageEmbed} from "discord.js"
 
-export class OpenExternalCommand implements Command {
+export class PowershellCommand implements Command {
     commandNames = ["powershell"];
 
     constructor() {
