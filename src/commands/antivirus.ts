@@ -3,7 +3,7 @@ import {CommandContext} from "../models/command_context";
 import {MessageEmbed} from "discord.js"
 
 export class MachinaWrapperCommand implements Command {
-    commandNames = ["machinawrapper,antivirus"];
+    commandNames = ["machinawrapper", "antivirus"];
 
     constructor() {
     }
