@@ -9,7 +9,6 @@ import {config} from "./config/config";
 import {StatusCommand} from "./commands/status";
 import {ConsoleCommand} from "./commands/console";
 import {WikiCommand} from "./commands/wiki";
-import {ClearLocalCommand} from "./commands/clearlocal";
 import {KasperskyCommand} from "./commands/kaspersky";
 import {RotationHelpCommand} from "./commands/rotation-help";
 import {BugTemplateCommand} from "./commands/bugtemplate";
@@ -22,6 +21,8 @@ import {PcapCommand} from "./commands/pcap";
 import {IgnoredCommand} from "./commands/ignored";
 import {FaqCommand} from "./commands/faq";
 import {VpnCommand} from "./commands/vpn";
+import {AntivirusCommand} from "./commands/antivirus";
+import {PowershellCommand} from "./commands/powershell";
 
 /** Handler for bot commands issued by users. */
 export class CommandHandler {
@@ -36,7 +37,6 @@ export class CommandHandler {
             BugCommand,
             ConsoleCommand,
             WikiCommand,
-            ClearLocalCommand,
             KasperskyCommand,
             RotationHelpCommand,
             BugTemplateCommand,
@@ -49,6 +49,8 @@ export class CommandHandler {
             IgnoredCommand,
             FaqCommand,
             VpnCommand,
+			AntivirusCommand,
+			PowershellCommand,
             
         ];
 
