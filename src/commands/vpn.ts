@@ -22,7 +22,7 @@ export class VpnCommand implements Command {
 				.setTitle('NordVPN')
 				.setDescription("Instructions for NordVPN")
 				.addField("Warning:", "NordVPN cannot work with Teamcraft if the Threat Protection features are active.")
-				.addField("How To:", "Open NordVPN and click the gear in the top right to open settings. On the General tab, either disable Threat Protection, or add exceptions for ffxivteamcraft.com , firebase.googleapis.com , firebaseio.com , etc.")
+				.addField("How To:", "Open NordVPN and click the gear in the top right to open settings. On the General tab, either disable Threat Protection, or add exceptions to it for ``ffxivteamcraft.com`` , ``firestore.googleapis.com`` , ``firebaseio.com`` , etc.")
 				.addField("Packet Capture:", useRawSocketBro);
 			break;
 
@@ -53,10 +53,11 @@ export class VpnCommand implements Command {
 
 		case 'openvpn':
 		case 'wireguard':
+		case 'cloudflare':
 			embed
-				.setTitle('OpenVPN and Wireguard')
+				.setTitle('OpenVPN, Wireguard, Cloudflare, etc.')
 				.setDescription("Instructions for OpenVPN and Wireguard based VPNs")
-				.addField("Warning:", "OpenVPN and Wireguard encapsulate packets, hiding them from Teamcraft. You *must* use Raw Socket mode for packet capture.")
+				.addField("Warning:", "OpenVPN, Wireguard, and other VPNs that use these as their backbone (like Cloudflare's VPN) encapsulate packets, hiding them from Teamcraft. You *must* use Raw Socket mode for packet capture.")
 				.addField("Packet Capture:", useRawSocketBro);
 			break;
 
@@ -65,8 +66,8 @@ export class VpnCommand implements Command {
 				.setTitle('VPN')
 				.setDescription("Packet Capture and Teamcraft compatibility instructions for VPN users")
 				.addField("About VPNs and Teamcraft:", "Teamcraft needs to see packets to parse them. Most VPNs hide packet contents for privacy, so Teamcraft isn't able to see them.")
-				.addField("Generic VPN Instructions:", "If your VPN is based on L2TP, it should Just Work™ in Teamcraft. If it's based on Wireguard, OpenVPN, or something more exotic you need to set Teamcraft to Raw Socket mode in settings.")
-				.addField("Specific VPN Instructions:", "We have extra help for some VPNs. You can see them by putting the VPN name after the command, such as '!!vpn mudfish'. The following list of VPNs have special instructions: ExitLag, Mudfish, Mullvad, NordVPN, OpenVPN, Wireguard.");
+				.addField("Generic VPN Instructions:", "If your VPN is based on L2TP, it should Just Work™ in Teamcraft. If it's based on Wireguard, OpenVPN, or something more exotic you need to set Teamcraft to Raw Socket mode in Settings > Desktop.")
+				.addField("Specific VPN Instructions:", "We have specific help for some VPNs. You can see them by putting the VPN name after the command, such as '!!vpn mudfish'. The following list of VPNs have specific instructions: ExitLag, Mudfish, Mullvad, NordVPN, OpenVPN, Wireguard, Cloudflare.");
 			break;
 				
 		}
