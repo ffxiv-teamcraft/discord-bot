@@ -15,12 +15,13 @@ export class BugCommand implements Command {
     async run(parsedUserCommand: CommandContext): Promise<void> {
         const embed = new MessageEmbed()
         .setTitle("How to submit a bug report for Teamcraft")
-        .setDescription("A clear and concise description of what the bug is.")
-        .addField("Steps to reproduce!", "A bug that can't be reproduced can't be fixed. Explain in detail what needs to be done to create the bug you are experiencing.")
-        .addField("Expected Behavior!", "A clear and concise description of what you expected to happen.")
-        .addField("Screenshots!", "Please provide any screenshots you can of what is happening. Opening the console via CTRL + SHIFT + I and clicking the console tab can also help us diagnose the issue.")
-        .addField("Software Version/Type!", "Are you using the website or the desktop app? If the app then what version? If the website then what browser?")
-        .addField("Additional Information", "Any additional context can help diagnose the issue. The more info the better!")
+        .setDescription("Providing a thorough bug or problem report helps us solve your issues quickly!")
+		.addField("Issue:", "A clear and concise description of what the bug is.")
+        .addField("Steps to reproduce:", "A bug that can't be reproduced can't be fixed. Explain in detail, with numbered steps, what needs to be done to trigger the issue or bug you are experiencing.")
+        .addField("Expected Behavior:", "A clear and concise description of what you expected to happen.")
+        .addField("Screenshots:", "Please provide any screenshots you can of what is happening. Opening the console via CTRL + SHIFT + I and clicking the ``Console`` tab is often extremely useful to help us diagnose the issue. Discord allows you to attach multiple screenshots to one post if need be!")
+        .addField("Software Version/Type:", "Are you using the website or the desktop app? If the app, then which version? If the website, then which browser?")
+        .addField("Additional Information:", "Any additional context that can help diagnose the issue. The more info, the better!")
         .addField("Bug Template", "```**Issue:** \n> \n**Steps to Reproduce:**\n> \n**Expected Behaviour:**\n> \n**Teamcraft Version - Browser / Desktop Client**\n> \n**Additional Information:**\n> \n**Screenshots:**\n\nCopy this and fill next to the > ```")
         .setFooter(
           "ffxiv-teamcraft",
