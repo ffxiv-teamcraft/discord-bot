@@ -5,6 +5,7 @@ import {CommissionSub} from "./pub-sub/commission-sub";
 import fetch from "node-fetch";
 import {PubSub} from "@google-cloud/pubsub";
 import {CacheService} from "./core/cache-service";
+import {twitStream} from "./twitter/twitter";
 
 validateConfig(config);
 
@@ -92,6 +93,27 @@ client.on('ready', () => {
             console.log('Patreon listener started', generalChannel.id);
         }
     );
+
+    client.channels.fetch('639779833366315019').then((generalChannel: TextChannel) => {
+        twitStream().then(t => {
+            const stream = t.stream("statuses/filter", { track: ["#ffxivteamcraft"] });
+
+            stream.on("connect", (request) => {
+              console.log("Tweet listener started");
+              stream.on("tweet", (tweet) => {
+                if (tweet.user.screen_name === config.twitter_username) {
+                    let tweetEmbed = new MessageEmbed()
+                        .setAuthor(`@${tweet.user.screen_name}`, tweet.user.profile_image_url_https, `https://twitter.com/${tweet.user.screen_name}`)
+                        .setDescription(`${tweet.text}\n\n[Tweet Link](https://twitter.com/${config.twitter_username}/status/${tweet.id})`)
+                        .setColor('#1DA1F2')
+                        .setFooter(tweet.created_at)
+                        
+                    generalChannel.send(tweetEmbed)
+                }
+              });
+            });
+        })
+    })
 })
 
 /** Pre-startup validation of the bot config. */
