@@ -19,7 +19,7 @@
   "dependencies": {
     "@google-cloud/pubsub": "^2.6.0",
     "discord.js": "^12.5.1",
-    "firebase-admin": "^7.3.0",
+    "firebase-admin": "^11.4.1",
     "moment-timezone": "^0.5.27",
     "express": "^4.17.1"
   },
