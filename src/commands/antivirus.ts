@@ -14,11 +14,11 @@ export class AntivirusCommand implements Command {
 
     async run(parsedUserCommand: CommandContext): Promise<void> {
         const embed = new MessageEmbed()
-        .setTitle("MachinaWrapper is likely getting blocked by your antivirus")
+        .setTitle("MachinaWrapper might be getting blocked by your antivirus")
         .setDescription("Many antivirus programs might attempt to block MachinaWrapper (needed for packet capture), or even the entire Teamcraft app installer, out of an abundance of caution.")
         .addField("Please try excluding the entire Teamcraft install folder, especially the MachinaWrapper folder (and/or the files ``MachinaWrapper.exe``, ``Machina.dll``, and ``Machina.FFXIV.dll``), in your antivirus.", "MachinaWrapper should be located at ``%LocalAppData%\\ffxiv-teamcraft\\app-x.y.z\\resources\\MachinaWrapper\\`` (where ``x.y.z`` is actually the latest version number for Teamcraft).")
 		.addField("Another option to try if the above has not fixed it:", "You may also wish to right-click and check the Properties of the EXE and DLL files in the folder to make sure Windows itself isn't showing an \"Unblock\" button near the bottom that you may click to unblock the file.")
-		.addField("This may have caused the download or installation of your installer to become corrupted", "Since it is likely that the Teamcraft app may not have been installed properly due to this blocking, please re-download and re-install Teamcraft to ensure all components have been installed properly.")
+		.addField("This may have caused the download or installation of your installer to become corrupted", "Since it is likely that the Teamcraft app may not have been installed properly due to this blocking, please re-download and re-install Teamcraft to ensure all components have been installed properly. You may type ``!!dirtyinstall`` in <#639503745176174592> to ensure the old install is properly removed.")
 		
         .setFooter(
           "ffxiv-teamcraft",
