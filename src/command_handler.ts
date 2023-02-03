@@ -23,6 +23,8 @@ import {FaqCommand} from "./commands/faq";
 import {VpnCommand} from "./commands/vpn";
 import {AntivirusCommand} from "./commands/antivirus";
 import {PowershellCommand} from "./commands/powershell";
+import {ClearSiteDataCommand} from "./commands/clearsitedata";
+import {BlockedSiteCommand} from "./commands/blockedsite";
 
 /** Handler for bot commands issued by users. */
 export class CommandHandler {
@@ -51,7 +53,8 @@ export class CommandHandler {
             VpnCommand,
 			AntivirusCommand,
 			PowershellCommand,
-            
+			ClearSiteDataCommand,
+			BlockedSiteCommand,            
         ];
 
         this.commands = commandClasses.map(commandClass => new commandClass());
