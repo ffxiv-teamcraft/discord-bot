@@ -28,71 +28,73 @@ client.on("error", e => {
 
 client.login(config.token);
 
-const pubsub = new PubSub({projectId: 'ffxivteamcraft'});
-const commissionsCreatedTopic = pubsub.topic('commissions-created').subscription('bot');
-const patreonPledgesTopic = pubsub.topic('patreon-pledges').subscription('patreon-pledges-sub');
+if (Boolean(process.env.GCLOUD)) {
+    const pubsub = new PubSub({projectId: 'ffxivteamcraft'});
+    const commissionsCreatedTopic = pubsub.topic('commissions-created').subscription('bot');
+    const patreonPledgesTopic = pubsub.topic('patreon-pledges').subscription('patreon-pledges-sub');
 
-fetch('https://raw.githubusercontent.com/ffxiv-teamcraft/ffxiv-teamcraft/staging/apps/client/src/assets/data/items.json')
-    .then(res => res.json())
-    .then(itemNames => {
-        const commissionSub = new CommissionSub(client, itemNames);
+    fetch('https://raw.githubusercontent.com/ffxiv-teamcraft/ffxiv-teamcraft/staging/apps/client/src/assets/data/items.json')
+        .then(res => res.json())
+        .then(itemNames => {
+            const commissionSub = new CommissionSub(client, itemNames);
 
-        commissionsCreatedTopic.on('message', message => {
-            message.ack();
-            const {event, commission} = JSON.parse(message.data.toString());
-            if (!commission.datacenter) {
-                return;
-            }
-            console.log('New event received', event, commission.datacenter, commission.name);
-            switch (event) {
-                case 'created':
-                    commissionSub.commissionCreated(commission);
-                    break;
-                case 'updated':
-                    commissionSub.commissionUpdated(commission);
-                    break;
-                case 'deleted':
-                    commissionSub.commissionDeleted(commission);
-                    break;
+            commissionsCreatedTopic.on('message', message => {
+                message.ack();
+                const {event, commission} = JSON.parse(message.data.toString());
+                if (!commission.datacenter) {
+                    return;
+                }
+                console.log('New event received', event, commission.datacenter, commission.name);
+                switch (event) {
+                    case 'created':
+                        commissionSub.commissionCreated(commission);
+                        break;
+                    case 'updated':
+                        commissionSub.commissionUpdated(commission);
+                        break;
+                    case 'deleted':
+                        commissionSub.commissionDeleted(commission);
+                        break;
 
-            }
+                }
+            });
+
+            console.log('Pub/Sub listener started');
         });
 
-        console.log('Pub/Sub listener started');
-    });
+    client.on('ready', () => {
+        client.channels.fetch('825664183797284884').then(
+            (generalChannel: TextChannel) => {
+                patreonPledgesTopic.on('message', message => {
+                    message.ack();
+                    const {amountDisplay, yearly, id} = JSON.parse(message.data.toString());
+                    if (CacheService.INSTANCE.getItem(id) === undefined) {
+                        // Patreon sometimes sends two requests because idk, so we're gonna avoid this here
+                        CacheService.INSTANCE.setItem(id, 'true');
+                        setTimeout(() => {
+                            CacheService.INSTANCE.deleteItem(id);
+                        }, 30000);
+                        const embed = new MessageEmbed()
+                            .setTitle('New patreon pledge')
+                            .setURL('https://www.patreon.com/bePatron?u=702160')
+                            .setDescription(`Someone just pledged $${amountDisplay} ${yearly ? 'per year' : 'per month'} on patreon, Yay!`)
+                            .setFooter(
+                                "patreon",
+                                "https://c5.patreon.com/external/logo/downloads_logomark_color_on_coral.png"
+                            )
+                            .setColor("#F96854");
 
-client.on('ready', () => {
-    client.channels.fetch('825664183797284884').then(
-        (generalChannel: TextChannel) => {
-            patreonPledgesTopic.on('message', message => {
-                message.ack();
-                const {amountDisplay, yearly, id} = JSON.parse(message.data.toString());
-                if (CacheService.INSTANCE.getItem(id) === undefined) {
-                    // Patreon sometimes sends two requests because idk, so we're gonna avoid this here
-                    CacheService.INSTANCE.setItem(id, 'true');
-                    setTimeout(() => {
-                        CacheService.INSTANCE.deleteItem(id);
-                    }, 30000);
-                    const embed = new MessageEmbed()
-                        .setTitle('New patreon pledge')
-                        .setURL('https://www.patreon.com/bePatron?u=702160')
-                        .setDescription(`Someone just pledged $${amountDisplay} ${yearly ? 'per year' : 'per month'} on patreon, Yay!`)
-                        .setFooter(
-                            "patreon",
-                            "https://c5.patreon.com/external/logo/downloads_logomark_color_on_coral.png"
-                        )
-                        .setColor("#F96854");
+                        generalChannel.send(embed).then(() => {
+                            console.log('Notified sub', amountDisplay, yearly, id);
+                        });
+                    }
+                })
 
-                    generalChannel.send(embed).then(() => {
-                        console.log('Notified sub', amountDisplay, yearly, id);
-                    });
-                }
-            })
-
-            console.log('Patreon listener started', generalChannel.id);
-        }
-    );
-})
+                console.log('Patreon listener started', generalChannel.id);
+            }
+        );
+    })
+}
 
 /** Pre-startup validation of the bot config. */
 function validateConfig(config: BotConfig) {
