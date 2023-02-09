@@ -32,7 +32,7 @@ const pubsub = new PubSub({projectId: 'ffxivteamcraft'});
 const commissionsCreatedTopic = pubsub.topic('commissions-created').subscription('bot');
 const patreonPledgesTopic = pubsub.topic('patreon-pledges').subscription('patreon-pledges-sub');
 
-fetch('https://raw.githubusercontent.com/ffxiv-teamcraft/ffxiv-teamcraft/staging/apps/client/src/assets/data/items.json')
+fetch('https://raw.githubusercontent.com/ffxiv-teamcraft/ffxiv-teamcraft/staging/libs/data/src/lib/json/items.json')
     .then(res => res.json())
     .then(itemNames => {
         const commissionSub = new CommissionSub(client, itemNames);
