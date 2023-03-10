@@ -20,9 +20,7 @@ import {MemberCountCommand} from "./commands/membercount";
 import {PcapCommand} from "./commands/pcap";
 import {IgnoredCommand} from "./commands/ignored";
 import {FaqCommand} from "./commands/faq";
-import {VpnCommand} from "./commands/vpn";
 import {AntivirusCommand} from "./commands/antivirus";
-import {PowershellCommand} from "./commands/powershell";
 import {ClearSiteDataCommand} from "./commands/clearsitedata";
 import {BlockedSiteCommand} from "./commands/blockedsite";
 
@@ -50,11 +48,9 @@ export class CommandHandler {
             PcapCommand,
             IgnoredCommand,
             FaqCommand,
-            VpnCommand,
-			AntivirusCommand,
-			PowershellCommand,
-			ClearSiteDataCommand,
-			BlockedSiteCommand,            
+            AntivirusCommand,
+            ClearSiteDataCommand,
+            BlockedSiteCommand,
         ];
 
         this.commands = commandClasses.map(commandClass => new commandClass());
