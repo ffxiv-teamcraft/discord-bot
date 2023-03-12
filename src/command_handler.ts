@@ -23,6 +23,8 @@ import {FaqCommand} from "./commands/faq";
 import {AntivirusCommand} from "./commands/antivirus";
 import {ClearSiteDataCommand} from "./commands/clearsitedata";
 import {BlockedSiteCommand} from "./commands/blockedsite";
+import {BitDefenderCommand} from "./commands/bit-defender";
+import {LogsCommand} from "./commands/logs";
 
 /** Handler for bot commands issued by users. */
 export class CommandHandler {
@@ -38,6 +40,8 @@ export class CommandHandler {
             ConsoleCommand,
             WikiCommand,
             KasperskyCommand,
+            BitDefenderCommand,
+            LogsCommand,
             RotationHelpCommand,
             BugTemplateCommand,
             OpenExternalCommand,
