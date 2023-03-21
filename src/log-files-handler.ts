@@ -20,7 +20,7 @@ export class LogFilesHandler {
             return message.channel.send('There was an error with fetching the file:' + response.statusText);
         }
         const userLogsChannel: TextChannel = message.client.channels.cache.find(channel => channel.id === '1087796748396810260') as TextChannel;
-        await userLogsChannel?.send({
+        const fullLogRef = await userLogsChannel?.send({
             content: `Log file from ${message.author.toString()} in ${message.channel.toString()}: ${file.name}`,
             files: [file]
         });
@@ -32,7 +32,8 @@ export class LogFilesHandler {
                         .setTitle('<:rd:709831391612764282> Log file analyzer')
                         .addFields(
                             {name: 'User', value: message.author.toString()},
-                            {name: 'File type', value: file.name}
+                            {name: 'File type', value: file.name},
+                            {name: 'Full log', value: `[${file.name}](${fullLogRef.url})`}
                         )
                         .setDescription('Log file is being parsed, please wait...')
                 ]
@@ -59,7 +60,9 @@ export class LogFilesHandler {
                             {name: 'DAT path', value: parsedMainLog.datFilesPath},
                             {name: 'Region', value: parsedMainLog.region, inline: true},
                             {name: 'Github Access', value: parsedMainLog.githubAccess, inline: true},
-                            {name: 'Deucalion Status', value: parsedMainLog.deucalionStatus, inline: true}),
+                            {name: 'Deucalion Status', value: parsedMainLog.deucalionStatus, inline: true},
+                            {name: 'Full log', value: `[${file.name}](${fullLogRef.url})`}
+                        ),
                     new EmbedBuilder()
                         .setColor(diagnosisColor)
                         .setTitle('Diagnosis')
