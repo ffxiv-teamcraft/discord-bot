@@ -21,7 +21,7 @@ export class LogFilesHandler {
         }
         const userLogsChannel: TextChannel = message.client.channels.cache.find(channel => channel.id === '1087796748396810260') as TextChannel;
         await userLogsChannel?.send({
-            content: `Log file from ${message.author.toString()}`,
+            content: `Log file from ${message.author.toString()} in ${message.channel.toString()}: ${file.name}`,
             files: [file]
         });
         await message.delete();
