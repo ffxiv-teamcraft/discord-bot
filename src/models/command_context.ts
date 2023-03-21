@@ -20,6 +20,6 @@ export class CommandContext {
         this.parsedCommandName = splitMessage.shift().toLowerCase();
         this.args = splitMessage;
         this.originalMessage = message;
-        this.authorMember = message.member || message.guild.member(message.author);
+        this.authorMember = message.member;
     }
 }

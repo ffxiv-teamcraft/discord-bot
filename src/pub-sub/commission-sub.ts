@@ -1,4 +1,4 @@
-import {Client, Message, MessageEmbed, MessageOptions, TextChannel} from 'discord.js'
+import {Client, EmbedBuilder, Message, TextChannel} from 'discord.js'
 import {CacheService} from "../core/cache-service";
 
 export class CommissionSub {
@@ -43,12 +43,12 @@ export class CommissionSub {
                             message.edit(this.getEmbed(commission));
                             break;
                         case 1:
-                            message.delete({reason: 'Linked commission has been started'}).then(() => {
+                            message.delete().then(() => {
                                 this.cache.deleteItem(commission.$key);
                             });
                             break;
                         case 2:
-                            message.delete({reason: 'Linked commission has been archived'}).then(() => {
+                            message.delete().then(() => {
                                 this.cache.deleteItem(commission.$key);
                             });
                             break;
@@ -63,7 +63,7 @@ export class CommissionSub {
         const channel = this.getChannel(commission);
         if (messageId && channel) {
             channel.messages.fetch(messageId).then(message => {
-                message.delete({reason: 'Linked commission was deleted'}).then(() => {
+                message.delete().then(() => {
                     this.cache.deleteItem(commission.$key);
                 });
             }).catch(e => console.warn(e))
@@ -86,7 +86,7 @@ export class CommissionSub {
         return undefined;
     }
 
-    private getEmbed(commission: any): MessageOptions {
+    private getEmbed(commission: any) {
         let price = commission.price;
         if (price <= 0) {
             price = 'To be discussed';
@@ -100,22 +100,31 @@ export class CommissionSub {
             .join('\n');
         return {
             content: '<@&786319001620840492>',
-            embed: new MessageEmbed()
+            embeds: [new EmbedBuilder()
                 .setTitle(commission.name || 'No name')
                 .setURL(`https://ffxivteamcraft.com/commission/${commission.$key}`)
-                .setDescription(`**Items (${items.length})**
+                .setDescription(`**Items (${commission.items.length})**
                 ${items.length > 0 ? items : 'No items yet'}
                 `)
-                .addField('Server', commission.server || 'Unknown server', true)
-                .addField('Payment', price, true)
-                .addField('Has all materials', (commission.includesMaterials || false).toString(), true)
-                .addField('Tags', commission.tags.length > 0 ? commission.tags.join(', ') : 'No tags', true)
-                .addField('Description', commission.description || 'No description')
-                .setFooter(
-                    "ffxiv-teamcraft",
-                    "https://ffxivteamcraft.com/assets/logo.png"
-                )
+                .addFields({name: 'Server', value: commission.server || 'Unknown server', inline: true})
+                .addFields({name: 'Payment', value: price, inline: true},
+                    {
+                        name: 'Has all materials',
+                        value: (commission.includesMaterials || false).toString(),
+                        inline: true
+                    },
+                    {
+                        name: 'Tags',
+                        value: commission.tags.length > 0 ? commission.tags.join(', ') : 'No tags',
+                        inline: true
+                    },
+                    {name: 'Description', value: commission.description || 'No description'})
+                .setFooter({
+                    text: "ffxiv-teamcraft",
+                    iconURL: "https://ffxivteamcraft.com/assets/logo.png"
+                })
                 .setColor("#4880b1")
+            ]
         };
     }
 

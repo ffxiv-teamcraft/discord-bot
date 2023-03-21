@@ -1,28 +1,48 @@
-import Discord, {Message, MessageEmbed, TextChannel} from "discord.js";
+import {Client, EmbedBuilder, Events, GatewayIntentBits, Message, TextChannel} from "discord.js";
 import {BotConfig, config} from "./config/config";
 import {CommandHandler} from "./command_handler";
 import {CommissionSub} from "./pub-sub/commission-sub";
 import fetch from "node-fetch";
 import {PubSub} from "@google-cloud/pubsub";
 import {CacheService} from "./core/cache-service";
+import {LogFilesHandler} from "./log-files-handler";
 
 validateConfig(config);
 
 const commandHandler = new CommandHandler(config.prefix);
+const logFilesHandler = new LogFilesHandler();
 
-const client = new Discord.Client();
+const client = new Client({
+    intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildModeration,
+        GatewayIntentBits.GuildInvites,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.GuildMessageReactions,
+        GatewayIntentBits.MessageContent
+    ]
+});
 
-//https://discordapp.com/api/oauth2/authorize?client_id=782224077632962571&permissions=2112&scope=bot
+//https://discordapp.com/api/oauth2/authorize?client_id=782224077632962571&permissions=322624&scope=bot
 
-client.on("ready", () => {
+client.once(Events.ClientReady, () => {
     console.log("Bot has started");
 });
 
-client.on("message", (message: Message) => {
-    commandHandler.handleMessage(message);
+client.on(Events.MessageCreate, async (message: Message) => {
+    try {
+        const attachment = message.attachments.first();
+        if (attachment?.name === 'main.log') {
+            await logFilesHandler.handleMessage(message);
+        } else {
+            await commandHandler.handleMessage(message);
+        }
+    } catch (err) {
+        console.error(err);
+    }
 });
 
-client.on("error", e => {
+client.on(Events.Error, e => {
     console.error("Discord client error!", e);
 });
 
@@ -61,7 +81,7 @@ fetch('https://raw.githubusercontent.com/ffxiv-teamcraft/ffxiv-teamcraft/staging
         console.log('Pub/Sub listener started');
     });
 
-client.on('ready', () => {
+client.once(Events.ClientReady, () => {
     client.channels.fetch('825664183797284884').then(
         (generalChannel: TextChannel) => {
             patreonPledgesTopic.on('message', message => {
@@ -73,17 +93,19 @@ client.on('ready', () => {
                     setTimeout(() => {
                         CacheService.INSTANCE.deleteItem(id);
                     }, 30000);
-                    const embed = new MessageEmbed()
+                    const embed = new EmbedBuilder()
                         .setTitle('New patreon pledge')
                         .setURL('https://www.patreon.com/bePatron?u=702160')
                         .setDescription(`Someone just pledged $${amountDisplay} ${yearly ? 'per year' : 'per month'} on patreon, Yay!`)
                         .setFooter(
-                            "patreon",
-                            "https://c5.patreon.com/external/logo/downloads_logomark_color_on_coral.png"
+                            {
+                                text: "patreon",
+                                iconURL: "https://c5.patreon.com/external/logo/downloads_logomark_color_on_coral.png"
+                            }
                         )
                         .setColor("#F96854");
 
-                    generalChannel.send(embed).then(() => {
+                    generalChannel.send({embeds: [embed]}).then(() => {
                         console.log('Notified sub', amountDisplay, yearly, id);
                     });
                 }

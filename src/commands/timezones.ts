@@ -1,6 +1,6 @@
 import {Command} from "./command";
 import {CommandContext} from "../models/command_context";
-import {MessageEmbed, Role} from "discord.js";
+import {EmbedBuilder, Role} from "discord.js";
 
 const moment = require('moment-timezone');
 
@@ -34,15 +34,15 @@ export class TimezonesCommand implements Command {
             return str + `\n - ${row.name}: ${moment().tz(row.timezone).format('hh:mm a')}`
         }, '');
 
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setTitle("Moderators and time at their place")
             .setDescription(`${builtList}`)
-            .setFooter(
-                "ffxiv-teamcraft",
-                "https://ffxivteamcraft.com/assets/logo.png"
-            )
+            .setFooter({
+                text: "ffxiv-teamcraft",
+                iconURL: "https://ffxivteamcraft.com/assets/logo.png"
+            })
             .setColor("#4bb1a8");
-        await parsedUserCommand.originalMessage.channel.send(embed);
+        await parsedUserCommand.originalMessage.channel.send({embeds: [embed]});
     }
 
 }

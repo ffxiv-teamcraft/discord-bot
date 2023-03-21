@@ -73,17 +73,21 @@ export class CommandHandler {
         const allowedCommands = this.commands.filter(command => command.hasPermissionToRun(commandContext));
         const matchedCommand = this.commands.find(command => command.commandNames.includes(commandContext.parsedCommandName));
 
-        if (!matchedCommand) {
-            await reactor.failure(message);
-        } else if (!allowedCommands.includes(matchedCommand)) {
-            await message.reply(`you aren't allowed to use that command. Try ${config.prefix}help.`);
-            await reactor.failure(message);
-        } else {
-            await matchedCommand.run(commandContext).then(() => {
-                reactor.success(message);
-            }).catch(reason => {
-                reactor.failure(message);
-            });
+        try {
+            if (!matchedCommand) {
+                await reactor.failure(message);
+            } else if (!allowedCommands.includes(matchedCommand)) {
+                await message.reply(`you aren't allowed to use that command. Try ${config.prefix}help.`);
+                await reactor.failure(message);
+            } else {
+                await matchedCommand.run(commandContext).then(() => {
+                    reactor.success(message);
+                }).catch(reason => {
+                    reactor.failure(message);
+                });
+            }
+        } catch (err) {
+            console.error(err);
         }
     }
 

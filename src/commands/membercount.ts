@@ -1,5 +1,5 @@
 import {Command} from "./command";
-import {MessageEmbed, Role} from "discord.js";
+import {EmbedBuilder, Role} from "discord.js";
 import {CommandContext} from "../models/command_context";
 
 export class MemberCountCommand implements Command {
@@ -23,19 +23,21 @@ export class MemberCountCommand implements Command {
         }
         const botCount = members.cache.filter(member => member.user.bot).size;
 
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setTitle('Member Count!')
-            .addField('Total Members:', members.cache.size)
-            .addField('Human count:', humanCount)
-            .addField('Patrons:', !patronRole ? 0 : patronCount)
-            .addField('Bot count:', botCount)
-            .setFooter(
-                "ffxiv-teamcraft",
-                "https://ffxivteamcraft.com/assets/logo.png"
-            )
+            .addFields([
+                {name: 'Total Members:', value: members.cache.size.toString()},
+                {name: 'Human count:', value: humanCount.toString()},
+                {name: 'Patrons:', value: (!patronRole ? 0 : patronCount).toString()},
+                {name: 'Bot count:', value: botCount.toString()}
+            ])
+            .setFooter({
+                text: "ffxiv-teamcraft",
+                iconURL: "https://ffxivteamcraft.com/assets/logo.png"
+            })
             .setColor("#4880b1");
 
-        parsedUserCommand.originalMessage.channel.send(embed);
+        await parsedUserCommand.originalMessage.channel.send({embeds: [embed]});
     }
 
 

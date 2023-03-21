@@ -1,6 +1,6 @@
 import {Command} from "./command";
 import {CommandContext} from "../models/command_context";
-import {MessageEmbed} from "discord.js";
+import {EmbedBuilder} from "discord.js";
 
 export class FixTimeCommand implements Command {
     commandNames = ["time", "alarmclock"];
@@ -13,15 +13,15 @@ export class FixTimeCommand implements Command {
     }
 
     async run(parsedUserCommand: CommandContext): Promise<void> {
-        const embed = new MessageEmbed()
-        .setTitle("Troubleshooting Alarm Times")
-        .setDescription("If you are having issues with timed node alarms being early or late, then your computer's clock may be off! Check [Time.is](https://time.is/) to see how off your Windows clock is.\n\nYou can just disable and re-enable Windows auto time sync and it will fix itself.")
-        .setFooter(
-          "ffxiv-teamcraft",
-          "https://ffxivteamcraft.com/assets/logo.png"
-        )
-        .setColor("#4880b1");
-        await parsedUserCommand.originalMessage.channel.send(embed);
+        const embed = new EmbedBuilder()
+            .setTitle("Troubleshooting Alarm Times")
+            .setDescription("If you are having issues with timed node alarms being early or late, then your computer's clock may be off! Check [Time.is](https://time.is/) to see how off your Windows clock is.\n\nYou can just disable and re-enable Windows auto time sync and it will fix itself.")
+            .setFooter({
+                text: "ffxiv-teamcraft",
+                iconURL: "https://ffxivteamcraft.com/assets/logo.png"
+            })
+            .setColor("#4880b1");
+        await parsedUserCommand.originalMessage.channel.send({embeds: [embed]});
     }
 
     hasPermissionToRun(parsedUserCommand: CommandContext): boolean {

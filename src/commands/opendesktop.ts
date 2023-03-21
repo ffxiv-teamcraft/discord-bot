@@ -1,6 +1,6 @@
 import {Command} from "./command";
 import {CommandContext} from "../models/command_context";
-import {MessageEmbed} from "discord.js"
+import {EmbedBuilder} from "discord.js"
 
 export class OpenExternalCommand implements Command {
     commandNames = ["opendesktop", "opendesk"];
@@ -13,16 +13,19 @@ export class OpenExternalCommand implements Command {
     }
 
     async run(parsedUserCommand: CommandContext): Promise<void> {
-        const embed = new MessageEmbed()
-        .setTitle("How to open a link in the desktop app")
-        .setDescription("To open a link in the desktop app you simply replace ``https://teamcraft.com`` with ``teamcraft://``")
-        .addField("Example", "``https://ffxivteamcraft.com/teams/invite/example`` \n becomes \n``teamcraft://teams/invite/example``")
-        .setFooter(
-          "ffxiv-teamcraft",
-          "https://ffxivteamcraft.com/assets/logo.png"
-        )
-        .setColor("#4880b1");
-        await parsedUserCommand.originalMessage.channel.send(embed);
+        const embed = new EmbedBuilder()
+            .setTitle("How to open a link in the desktop app")
+            .setDescription("To open a link in the desktop app you simply replace ``https://teamcraft.com`` with ``teamcraft://``")
+            .addFields({
+                name: "Example",
+                value: "``https://ffxivteamcraft.com/teams/invite/example`` \n becomes \n``teamcraft://teams/invite/example``"
+            })
+            .setFooter({
+                text: "ffxiv-teamcraft",
+                iconURL: "https://ffxivteamcraft.com/assets/logo.png"
+            })
+            .setColor("#4880b1");
+        await parsedUserCommand.originalMessage.channel.send({embeds: [embed]});
     }
 
     hasPermissionToRun(parsedUserCommand: CommandContext): boolean {
