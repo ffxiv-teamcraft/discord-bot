@@ -63,7 +63,7 @@ export class LogFilesHandler {
                     new EmbedBuilder()
                         .setColor(diagnosisColor)
                         .setTitle('Diagnosis')
-                        .setDescription(diagnosis.errors.length === 0 ? ':white_check_mark: No errors detected in the log file.' : diagnosis.errors.map(row => ` <:redtick:567088349484023818> ${row}`).join('\n')),
+                        .setDescription(diagnosis.errors.length === 0 ? ':white_check_mark: No errors detected in the log file.' : diagnosis.errors.map(row => ` :red_circle: ${row}`).join('\n')),
                     ...(diagnosis.warnings.length > 0 ? [
                         new EmbedBuilder()
                             .setColor('Gold')
