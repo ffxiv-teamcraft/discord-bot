@@ -10,6 +10,9 @@ interface LogLine {
 export class LogFilesHandler {
 
     async handleMessage(message: Message) {
+        if (message.author.bot) {
+            return;
+        }
         const file = message.attachments.first();
         const response = await fetch(file.url);
 
