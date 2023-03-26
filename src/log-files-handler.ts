@@ -97,7 +97,7 @@ export class LogFilesHandler {
             return content.includes('RECV ON') && content.includes('SEND ON') ? 'OK' : '**ERR**';
         });
 
-        const githubAccess = this.getStatusFromLines(lines, 'error', /EACCES/, () => {
+        const githubAccess = this.getStatusFromLines(lines, 'error', /::443/, () => {
             return '**ERR**'
         }, "OK");
 
