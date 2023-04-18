@@ -31,7 +31,7 @@ export class PcapCommand implements Command {
                 },
                 {
                     name: "Did you exclude Teamcraft from your antivirus?",
-                    value: "Many antivirus programs are blocking Teamcraft out of an abundance of caution, type the ``!!antivirus`` command in <#639503745176174592> or <#427756963867394048> to learn more."
+                    value: "Many antivirus programs are now blocking Deucalion or the entirety of Teamcraft out of an abundance of caution; type the ``!!antivirus`` command in <#639503745176174592> or <#427756963867394048> for tips on how to exclude Teamcraft to avoid this false positive."
                 },
                 {
                     name: "If the above are true, please do the following.",

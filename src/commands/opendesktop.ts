@@ -15,7 +15,7 @@ export class OpenExternalCommand implements Command {
     async run(parsedUserCommand: CommandContext): Promise<void> {
         const embed = new EmbedBuilder()
             .setTitle("How to open a link in the desktop app")
-            .setDescription("To open a link in the desktop app you simply replace ``https://teamcraft.com`` with ``teamcraft://``")
+            .setDescription("To open a link in the desktop app you may simply replace ``https://teamcraft.com`` with ``teamcraft://`` .")
             .addFields({
                 name: "Example",
                 value: "``https://ffxivteamcraft.com/teams/invite/example`` \n becomes \n``teamcraft://teams/invite/example``"

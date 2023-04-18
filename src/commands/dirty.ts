@@ -41,8 +41,8 @@ export class DirtyInstallCommand implements Command {
                     value: "Please open ``Control Panel\\Programs\\Programs and Features`` and make sure that TC is not listed. If it is please click it and click uninstall. It might fuss about the app not being able to be found. You may safely ignore this and click ok."
                 },
                 {
-                    name: "Uninstall win10pcap",
-                    value: "If you have win10pcap installed, please uninstall this before reinstalling Teamcraft or NPcap."
+                    name: "Uninstall Win10pcap",
+                    value: "If you have win10pcap installed, please uninstall this before reinstalling Teamcraft. It is extremely outdated (and Teamcraft now uses a completely different packet capture method anyway)."
                 },
                 {
                     name: "Restart Computer",

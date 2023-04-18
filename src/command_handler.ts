@@ -25,6 +25,8 @@ import {ClearSiteDataCommand} from "./commands/clearsitedata";
 import {BlockedSiteCommand} from "./commands/blockedsite";
 import {BitDefenderCommand} from "./commands/bit-defender";
 import {LogsCommand} from "./commands/logs";
+import {PowershellCommand} from "./commands/powershell";
+import {VpnCommand} from "./commands/vpn";
 
 /** Handler for bot commands issued by users. */
 export class CommandHandler {
@@ -55,6 +57,8 @@ export class CommandHandler {
             AntivirusCommand,
             ClearSiteDataCommand,
             BlockedSiteCommand,
+			PowershellCommand,
+			VpnCommand,
         ];
 
         this.commands = commandClasses.map(commandClass => new commandClass());
@@ -77,7 +81,7 @@ export class CommandHandler {
             if (!matchedCommand) {
                 await reactor.failure(message);
             } else if (!allowedCommands.includes(matchedCommand)) {
-                await message.reply(`you aren't allowed to use that command. Try ${config.prefix}help.`);
+                await message.reply(`You aren't allowed to use that command. Try ${config.prefix}help.`);
                 await reactor.failure(message);
             } else {
                 await matchedCommand.run(commandContext).then(() => {
