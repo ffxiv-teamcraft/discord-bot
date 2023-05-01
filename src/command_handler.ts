@@ -25,6 +25,7 @@ import {ClearSiteDataCommand} from "./commands/clearsitedata";
 import {BlockedSiteCommand} from "./commands/blockedsite";
 import {BitDefenderCommand} from "./commands/bit-defender";
 import {LogsCommand} from "./commands/logs";
+import {ProfitsApiCommand} from "./commands/profits-api";
 import {PowershellCommand} from "./commands/powershell";
 import {VpnCommand} from "./commands/vpn";
 
@@ -59,6 +60,7 @@ export class CommandHandler {
             BlockedSiteCommand,
 			PowershellCommand,
 			VpnCommand,
+            ProfitsApiCommand
         ];
 
         this.commands = commandClasses.map(commandClass => new commandClass());
@@ -87,6 +89,7 @@ export class CommandHandler {
                 await matchedCommand.run(commandContext).then(() => {
                     reactor.success(message);
                 }).catch(reason => {
+                    console.error(reason);
                     reactor.failure(message);
                 });
             }
