@@ -165,7 +165,8 @@ export class LogFilesHandler {
                     diagnosis.errors.push(`Teamcraft's packet capture system tried to start without the game running, make sure to start packet capture with the game running.`);
                     break;
                 case 'GAME_RUNNING_AS_ADMIN':
-                    diagnosis.errors.push(`Teamcraft cannot inject deucalion in the game process because it's either started as admin or protected by something. Make sure to not start the game as admin or if you do, start Teamcraft as admin too.`);
+                    log.deucalionStatus = 'CANNOT_INJECT';
+                    diagnosis.errors.push(`Teamcraft cannot inject deucalion in the game process because it's either started as admin or protected by something. Make sure to not start the game as admin or if you do, start Teamcraft as admin too. Make sure your Antivirus isn't blocking Teamcraft neither and if none of these work, consider starting the game using XIVLauncher.`);
                     break;
                 case 'DLL_NOT_FOUND':
                     diagnosis.errors.push(`It looks like your antivirus deleted deucalion.dll in Teamcraft's files, please add an exclusion for it and install Teamcraft again.`);
