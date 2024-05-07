@@ -16,7 +16,9 @@ export class CommissionSub {
         莫古力: '782287319221796865',
         陆行鸟: '782287342563098646',
         korea: '782635554259861530',
-        materia: '943576832404508752'
+        materia: '943576832404508752',
+        dynamis: '1237307315552522291',
+        shadow: '1237307585892323339'
     }
 
     private cache = CacheService.INSTANCE;
@@ -96,7 +98,7 @@ export class CommissionSub {
         const items = commission.items
             .map(item => ({...item, name: this.itemNames[item.id]}))
             .filter(item => item.amount - item.done > 0 && item.name !== undefined)
-            .map(item => ` - **${item.name.en}** x${item.amount - item.done}`)
+            .map(item => `- **${item.name.en}** x${item.amount - item.done}`)
             .join('\n');
         return {
             content: '<@&786319001620840492>',
