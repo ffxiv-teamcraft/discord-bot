@@ -15,6 +15,7 @@ export class LogFilesHandler {
         }
         const file = message.attachments.first();
         const response = await fetch(file.url);
+        const originalMessage = message.content;
 
         if (!response.ok) {
             return message.channel.send('There was an error with fetching the file:' + response.statusText);
@@ -53,8 +54,13 @@ export class LogFilesHandler {
                 embeds: [
                     new EmbedBuilder()
                         .setColor("#4880b1")
+                        .setTitle('Original Message')
+                        .setDescription(originalMessage),
+                    new EmbedBuilder()
+                        .setColor("#4880b1")
                         .setTitle('<:bd:709831391587598417> Log file analyzer')
-                        .addFields({name: 'User', value: message.author.toString(), inline: true},
+                        .addFields(
+                            {name: 'User', value: message.author.toString(), inline: true},
                             {name: 'Version', value: parsedMainLog.appVersion, inline: true},
                             {name: 'File type', value: file.name, inline: true},
                             {name: 'DAT path', value: parsedMainLog.datFilesPath},
