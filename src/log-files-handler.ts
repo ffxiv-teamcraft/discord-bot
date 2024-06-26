@@ -55,7 +55,7 @@ export class LogFilesHandler {
                     new EmbedBuilder()
                         .setColor("#4880b1")
                         .setTitle('Original Message')
-                        .setDescription(originalMessage),
+                        .setDescription(originalMessage || '*No original message*'),
                     new EmbedBuilder()
                         .setColor("#4880b1")
                         .setTitle('<:bd:709831391587598417> Log file analyzer')
