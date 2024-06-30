@@ -103,6 +103,10 @@ export class LogFilesHandler {
             return content.includes('RECV ON') && content.includes('SEND ON') ? 'OK' : '**ERR**';
         });
 
+        const deucalionFailedHook = this.getStatusFromLines(lines, 'info', /^DEUCALION: SERVER HELLO/, content => {
+            return content.includes('RECV OFF') || content.includes('SEND OFF') ? 'FAIL' : 'OK';
+        });
+
         const githubAccess = this.getStatusFromLines(lines, 'error', /::443/, () => {
             return '**ERR**'
         }, "OK");
@@ -118,7 +122,12 @@ export class LogFilesHandler {
 
         const couldntStartPcapIndex = lines.findIndex(line => line.level === 'error' && line.content.includes(`Couldn't start packet capture`));
 
-        const deucalionError = couldntStartPcapIndex > 0 ? lines[couldntStartPcapIndex - 1]?.content : '';
+        let deucalionError = '';
+        if (deucalionFailedHook) {
+            deucalionError = 'FAILED_HOOK';
+        } else if (couldntStartPcapIndex > 0) {
+            deucalionError = lines[couldntStartPcapIndex - 1]?.content
+        }
 
         return {
             datFilesPath,
@@ -154,7 +163,13 @@ export class LogFilesHandler {
         return lines.filter(l => l.date.getTime() >= lastStart);
     }
 
-    private getMainLogDiagnosis(log: { deucalionStatus: string; appVersion: string; githubAccess: string; region: string; datFilesPath: string }): { errors: string[], warnings: string [] } {
+    private getMainLogDiagnosis(log: {
+        deucalionStatus: string;
+        appVersion: string;
+        githubAccess: string;
+        region: string;
+        datFilesPath: string
+    }): { errors: string[], warnings: string [] } {
         const diagnosis = {
             errors: [],
             warnings: []
@@ -172,10 +187,13 @@ export class LogFilesHandler {
                     break;
                 case 'GAME_RUNNING_AS_ADMIN':
                     log.deucalionStatus = 'CANNOT_INJECT';
-                    diagnosis.errors.push(`Teamcraft cannot inject deucalion in the game process because it's either started as admin or protected by something. Make sure to not start the game as admin or if you do, start Teamcraft as admin too. Make sure your Antivirus isn't blocking Teamcraft neither and if none of these work, consider starting the game using XIVLauncher.`);
+                    diagnosis.errors.push(`Teamcraft cannot inject deucalion in the game process because it's either started as admin or protected by something. Make sure to not start the game as admin or if you do, start Teamcraft as admin too.\nMake sure your Antivirus isn't blocking Teamcraft neither and if none of these work, consider starting the game using XIVLauncher.`);
                     break;
                 case 'DLL_NOT_FOUND':
                     diagnosis.errors.push(`It looks like your antivirus deleted deucalion.dll in Teamcraft's files, please add an exclusion for it and install Teamcraft again.`);
+                    break;
+                case 'FAILED_HOOK':
+                    diagnosis.errors.push(`Deucalion failed to hook on RECV and SEND, it means that you're either using the old Deucalion (pre-7.0) on FFXIV: Dawntrail or you're using the new Deucalion on Korean region, restart your PC, run the \`!!dirtyinstall\` steps and it should behave properly again.\nIf you're playing in Korea, make sure to set your Region to Korea in settings.`);
                     break;
                 default:
                     diagnosis.errors.push(`An unknown error is happening with deucalion, staff members will investigate further.`);
