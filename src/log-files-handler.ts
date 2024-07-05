@@ -104,7 +104,7 @@ export class LogFilesHandler {
         });
 
         const deucalionFailedHook = this.getStatusFromLines(lines, 'info', /^DEUCALION: SERVER HELLO/, content => {
-            return content.includes('RECV OFF') || content.includes('SEND OFF') ? 'FAIL' : 'OK';
+            return (content.includes('RECV OFF') || content.includes('SEND OFF')) ? 'FAIL' : 'OK';
         });
 
         const githubAccess = this.getStatusFromLines(lines, 'error', /::443/, () => {
@@ -123,7 +123,7 @@ export class LogFilesHandler {
         const couldntStartPcapIndex = lines.findIndex(line => line.level === 'error' && line.content.includes(`Couldn't start packet capture`));
 
         let deucalionError = '';
-        if (deucalionFailedHook) {
+        if (deucalionFailedHook === 'FAIL') {
             deucalionError = 'FAILED_HOOK';
         } else if (couldntStartPcapIndex > 0) {
             deucalionError = lines[couldntStartPcapIndex - 1]?.content
