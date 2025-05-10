@@ -3,7 +3,7 @@ import {CommandContext} from "../models/command_context";
 import {EmbedBuilder} from "discord.js"
 
 export class BugCommand implements Command {
-    commandNames = ["bug", "bug-report"];
+    commandNames = ["bug", "bug-report", "bugs", "bugreport"];
 
     constructor() {
     }
@@ -23,7 +23,7 @@ export class BugCommand implements Command {
                 },
                 {
                     name: "Steps to reproduce:",
-                    value: "A bug that can't be reproduced can't be fixed. Explain in detail, with numbered steps, what needs to be done to trigger the issue or bug you are experiencing."
+                    value: "A bug that can't be reproduced can't be fixed. Explain in detail, **with numbered steps**, what needs to be done to trigger the issue or bug you are experiencing."
                 },
                 {
                     name: "Expected Behavior:",
@@ -31,7 +31,7 @@ export class BugCommand implements Command {
                 },
                 {
                     name: "Screenshots:",
-                    value: "Please provide any screenshots you can of what is happening. Opening the console via CTRL + SHIFT + I and clicking the ``Console`` tab is often extremely useful to help us diagnose the issue. Discord allows you to attach multiple screenshots to one post if need be!"
+                    value: "Please provide any screenshots you can of what is happening. Opening the console via ``CTRL + SHIFT + I`` and clicking the ``Console`` tab is often extremely useful to help us diagnose the issue. Discord allows you to attach multiple screenshots to one post if need be!"
                 },
                 {
                     name: "Software Version/Type:",

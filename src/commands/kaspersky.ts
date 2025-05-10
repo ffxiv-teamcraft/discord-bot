@@ -15,10 +15,10 @@ export class KasperskyCommand implements Command {
     async run(parsedUserCommand: CommandContext): Promise<void> {
         const embed = new EmbedBuilder()
             .setTitle("Kaspersky")
-            .setDescription("Kaspersky has sadly been blocking Firestore, which is Teamcraft's database, by default.")
-            .addFields({
-                name: "One way this can be fixed is by whitelisting Firestore.",
-                value: "Go to [Kaspersky](https://www.kaspersky.com.au/blog/kaspersky-add-exclusion/14765/) and add ``https://firestore.googleapis.com/*`` and ``https://*.firebaseio.com/*`` to the whitelist."
+            .setDescription("Kaspersky has sadly been blocking Firestore, which is used to serve Teamcraft's database, by default. It may also block the desktop app in general.")
+			.addFields({
+                name: "You will need to whitelist Teamcraft and its database in Kaspersky's settings.",
+                value: "- Open Kaspersky and go to Settings \n - Click Security Settings \n - Click 'Exclusions and actions on object detection' near the bottom \n - Under exclusions and trusted applications, add ``%LocalAppData%\\ffxiv-teamcraft\\`` and ``%AppData%\\ffxiv-teamcraft\\`` \n - If need be, add the exact Teamcraft EXE to the exceptions, but be warned that you will need to update that every time Teamcraft updats \n - Return to Settings > Security Settings and go to Network Settings \n - Under Configure Trusted Addresses, click Add to add ``https://firestore.googleapis.com/*`` and ``https://*.firebaseio.com/*`` to the whitelist."
             })
             .setFooter({
                 text: "ffxiv-teamcraft",

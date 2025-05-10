@@ -3,7 +3,7 @@ import {CommandContext} from "../models/command_context";
 import {EmbedBuilder} from "discord.js"
 
 export class LogsCommand implements Command {
-    commandNames = ["logs"];
+    commandNames = ["logs","log"];
 
     constructor() {
     }

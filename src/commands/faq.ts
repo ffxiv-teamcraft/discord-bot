@@ -6,7 +6,7 @@ export class FaqCommand implements Command {
     commandNames = ['faq'];
 
     getHelpMessage(commandPrefix: string): string {
-        return `Use ${commandPrefix}faq and arguements to load a certain faq.`;
+        return `Use ${commandPrefix}faq and arguments to load a certain faq.`;
     }
 
     async run(parsedUserCommand: CommandContext): Promise<void> {
@@ -19,15 +19,16 @@ export class FaqCommand implements Command {
             case 'melding':
                 embed
                     .setTitle('Melding Guides')
-                    .setDescription('Melding guides cover how best to gear at endgame, what materia to meld and what choices you should make when it comes to gearing.')
-                    .addFields({
-                        name: 'Crafting',
-                        value: 'Crafting meld guides can be found [here.](https://guides.ffxivteamcraft.com/guide/crafting-melding-guide)'
-                    })
-                    .addFields({
+                    .setDescription('Melding guides cover how best to gear at endgame, what materia to meld, and what choices you should make when it comes to gearing.')
+                     .addFields({
                         name: 'Gathering',
                         value: 'Gathering meld guides can be found [here.](https://guides.ffxivteamcraft.com/guide/gathering-melding-guide)'
                     })
+					.addFields({
+                        name: 'Crafting',
+                        value: 'Crafting meld guides can be found [here.](https://guides.ffxivteamcraft.com/guide/crafting-melding-guide)'
+                    })
+                   
                     .setFooter({
                         text: "ffxiv-teamcraft",
                         iconURL: "https://ffxivteamcraft.com/assets/logo.png"
@@ -38,14 +39,14 @@ export class FaqCommand implements Command {
             case 'leveling':
                 embed
                     .setTitle('Leveling Guides')
-                    .setDescription('This guide will explain how to efficiently level your Crafting and Gathering classes.')
+                    .setDescription('These guides will explain how to efficiently level your Gathering and Crafting classes.')
+					.addFields({
+                        name: 'Gathering',
+                        value: 'Gathering leveling guides can be found [here.](https://guides.ffxivteamcraft.com/guide/gathering-leveling-guide)'
+                    })
                     .addFields({
                         name: 'Crafting',
                         value: 'Crafting leveling guides can be found [here.](https://guides.ffxivteamcraft.com/guide/crafting-leveling-guide)'
-                    })
-                    .addFields({
-                        name: 'Gathering',
-                        value: 'Gathering leveling guides can be found [here.](https://guides.ffxivteamcraft.com/guide/gathering-leveling-guide)'
                     })
                     .setFooter({
                         text: "ffxiv-teamcraft",
@@ -77,7 +78,7 @@ export class FaqCommand implements Command {
                 break;
 
             default:
-                await parsedUserCommand.originalMessage.reply('Invalid Argument, Try `rotations`, `leveling`, or `melding`.');
+                await parsedUserCommand.originalMessage.reply('Invalid Argument. Try `rotations`, `leveling`, or `melding`.');
         }
     }
 

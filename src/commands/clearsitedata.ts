@@ -16,6 +16,10 @@ export class ClearSiteDataCommand implements Command {
         const embed = new EmbedBuilder()
             .setTitle("Part of Teamcraft's website is failing to load, indicating a problem with old site data or cache")
             .setDescription("Please clear your site data and/or cache")
+			.addFields({
+                name: "You may first try a hard refresh to quickly reload while avoiding the site's cache",
+                value: "Press ``Ctrl + Shift + R`` or ``Ctrl + F5`` (``Cmd + F5`` on Mac) to refresh the page and reload it as if there were no cache. If this quick process does not cause the website to load fully, **continue this process with the below steps**."
+            })
             .addFields([
                 {
                     name: "Warning:",
@@ -36,7 +40,7 @@ export class ClearSiteDataCommand implements Command {
                 },
                 {
                     name: "If clearing site data was not enough to resolve your problem",
-                    value: "Please clear your cache as well."
+                    value: "Please clear your browser's cache as well."
                 }
             ])
 
