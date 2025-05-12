@@ -5,9 +5,9 @@ import {EmbedBuilder} from "discord.js"
 export class AntivirusCommand implements Command {
     commandNames = ["antivirus"];
 
-    constructor() {
+ /*   constructor() {
     }
-
+*/
     getHelpMessage(commandPrefix: string): string {
         return `Use ${commandPrefix}antivirus to get information on which folders and files to whitelist in your antivirus.`;
     }
@@ -26,7 +26,7 @@ export class AntivirusCommand implements Command {
             })
             .addFields({
                 name: "Either way, this may have caused the download or installation of your installer to become corrupted",
-                value: "Since it is likely that the Teamcraft app may not have been installed properly due to this blocking, please re-download and re-install Teamcraft to ensure that all components have been installed properly. You may type ``!!dirtyinstall`` in <#639503745176174592> or <#427756963867394048> to ensure that the old install is properly removed."
+                value: "Since it is likely that the Teamcraft app may not have been installed properly due to this blocking, please re-download and re-install Teamcraft to ensure that all components have been installed properly. You may type ``!!dirtyinstall`` in <#427756963867394048> or <#639503745176174592> to ensure that the old install is properly removed."
             })
             .addFields({
                 name: "BitDefender",
