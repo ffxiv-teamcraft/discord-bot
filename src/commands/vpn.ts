@@ -115,7 +115,7 @@ export class VpnCommand implements Command {
 					},
 					{
 					name: "Generic VPN Instructions:",
-					value: "If your VPN is based on L2TP, it should Just Work™ in Teamcraft. If you believe it's possible your VPN or security software may be blocking vital URLs, please type ``!!blockedsite`` in <#639503745176174592> or <#427756963867394048> and try to make exceptions for those sites in your VPN."
+					value: "If your VPN is based on L2TP, it should Just Work™ in Teamcraft. If you believe it's possible your VPN or security software may be blocking vital URLs, please type ``!!blockedsite`` in <#427756963867394048> or <#639503745176174592> and try to make exceptions for those sites in your VPN."
 					}
 				])
 			.setFooter({
