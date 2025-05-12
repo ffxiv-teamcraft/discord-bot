@@ -15,7 +15,7 @@ export class PcapCommand implements Command {
     async run(parsedUserCommand: CommandContext): Promise<void> {
         const embed = new EmbedBuilder()
             .setTitle("Troubleshooting Packet Capture and Inventory Tracking")
-            .setDescription("Any steps mentioning ``!!commands`` are **Discord bot commands** meant to be used in <#639503745176174592> or <#427756963867394048> for further instructions.\n\n**Attention PS4/PS5 Players** Packet capture does not work for the PS4/PS5, only on Windows. We also cannot support Linux.")
+            .setDescription("Any steps mentioning '``!!commands``' are **Discord bot commands** meant to be used in <#639503745176174592> or <#427756963867394048> for further instructions. \n\n **Attention PS4/PS5 Players** Packet capture does not work for the PS4/PS5, only on Windows. We also unfortunately cannot officially support Linux.")
             .addFields([
                 {
                     name: "Are you using the Desktop App?",
@@ -27,7 +27,7 @@ export class PcapCommand implements Command {
                 },
                 {
                     name: "Have you restarted Teamcraft?",
-                    value: "As of version 8.0.12, PCAP no longer requires a client update to update opcodes. Restarting Teamcraft will ensure that the opcodes are fully up to date."
+                    value: "As of version 8.0.12, packet capture no longer requires a client update to update opcodes. Restarting Teamcraft will ensure that the opcodes are fully up to date."
                 },
                 {
                     name: "Did you exclude Teamcraft from your antivirus?",
@@ -39,11 +39,11 @@ export class PcapCommand implements Command {
                 },
                 {
                     name: "There was no output! Please help!",
-                    value: "Please post your ``main.log`` file (can be found in ``%AppData%/ffxiv-teamcraft/logs/``) and your most recent Deucalion session log (can be found in ``%AppData%/deucalion``) in <#639503745176174592>.\n\n We should be able to find what's wrong based on that."
+                    value: "Please describe your issue and upload your ``main.log`` file (can be found in ``%AppData%/ffxiv-teamcraft/logs/``) and your most recent Deucalion session log (can be found in ``%AppData%/deucalion/``) in <#639503745176174592>.\n\n We should be able to find what's wrong based on that."
                 },
                 {
                     name: "What if you *did* get output from ``window.debugPackets = true;``, but your inventory tracking still isn't working right?",
-                    value: "Type the ``!!ichara`` command in <#639503745176174592> or <#427756963867394048> and follow the instructions, as it's possible you need to reset your character links."
+                    value: "Type the ``!!ichara`` command in <#427756963867394048> or <#639503745176174592> or  and follow the instructions, as it's possible you need to reset your character links."
                 },
                 {
                     name: "Still not working. :(",

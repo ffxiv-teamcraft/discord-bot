@@ -22,11 +22,11 @@ export class BlockedSiteCommand implements Command {
             })
             .addFields({
                 name: "We already have specific instructions for Kaspersky:",
-                value: "Type ``!!kaspersky`` in the <#639503745176174592> or <#427756963867394048> channels to see instructions specific to allowing the appropriate sites through Kaspersky."
+                value: "Type ``!!kaspersky`` in the <#427756963867394048> or <#639503745176174592> channels to see instructions specific to allowing the appropriate sites through Kaspersky."
             })
             .addFields({
                 name: "We may also already have some specific instructions to follow for your VPN:",
-                value: "Type ``!!vpn generic`` in <#639503745176174592> or <#427756963867394048> to see if your VPN is among the ones for which we already have instructions."
+                value: "Type ``!!vpn generic`` in <#427756963867394048> or <#639503745176174592> to see if your VPN is among the ones for which we already have instructions."
             })
             .addFields({
                 name: "Sites you should add to any 'allow' feature your security software might have",

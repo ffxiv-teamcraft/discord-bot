@@ -30,7 +30,7 @@ export class AntivirusCommand implements Command {
             })
             .addFields({
                 name: "BitDefender",
-                value: "BitDefender is a special case. Type `!!bitdefender` in <#639503745176174592> or <#427756963867394048> to learn more about it."
+                value: "BitDefender is a special case. Type `!!bitdefender` in <#427756963867394048> or <#639503745176174592> to learn more about it."
             })
             .setFooter({
                 text: "ffxiv-teamcraft",

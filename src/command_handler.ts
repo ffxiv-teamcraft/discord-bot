@@ -28,6 +28,7 @@ import {LogsCommand} from "./commands/logs";
 import {ProfitsApiCommand} from "./commands/profits-api";
 import {PowershellCommand} from "./commands/powershell";
 import {VpnCommand} from "./commands/vpn";
+import {DesktopCommand} from "./commands/desktopapp";
 
 /** Handler for bot commands issued by users. */
 export class CommandHandler {
@@ -60,7 +61,8 @@ export class CommandHandler {
             BlockedSiteCommand,
 			PowershellCommand,
 			VpnCommand,
-            ProfitsApiCommand
+            ProfitsApiCommand,
+			DesktopCommand
         ];
 
         this.commands = commandClasses.map(commandClass => new commandClass());
